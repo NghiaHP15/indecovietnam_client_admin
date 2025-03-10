@@ -325,3 +325,10 @@ export interface Service {
   publicKey: string;
   privateKey: string;
 }
+export interface CategoriesType {
+  id?:string,
+  name: string,
+  description:string,
+  updated_at: string,
+  updated_by: string,
+}

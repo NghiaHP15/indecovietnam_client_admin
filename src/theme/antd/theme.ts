@@ -79,7 +79,7 @@ const themeModeToken: Record<'dark' | 'light', ThemeConfig> = {
       colorBgLayout: '#F9F9F9',
       colorBgContainer: '#fff',
       colorBgElevated: '#F9F9F9',
-      colorBgBase: '#131313',
+      // colorBgBase: '#131313',
       colorPrimaryBg: "#fff",
       colorBorder: "#DBE0E4"
     },
