@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    {{- include "labels" . | nindent 6 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.container.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "labels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{  .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: {{ .Values.dockerRegistry | default ""}}{{ .Values.container.image.repository }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.container.image.pullPolicy }}
+          {{if .Values.container.ports }}
+          ports:
+          {{ range  .Values.container.ports}}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+              protocol: {{ .protocol }}
+          {{end}}
+          {{end}}
+          {{- with .Values.container.env }}
+          env:
+          {{- toYaml . | nindent 10 }}
+          {{end}}
+          {{- with .Values.container.envFrom }}
+          envFrom:
+          {{- toYaml . | nindent 10 }}
+          {{end}}
+          {{- with .Values.container.livenessProbe }}
+          livenessProbe:
+          {{- tpl . $ | nindent 12 }}
+          {{- end }}
+          {{- with .Values.container.readinessProbe }}
+          readinessProbe:
+          {{- tpl . $ | nindent 12 }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.container.resources | nindent 12 }}
+          {{- if .Values.application.files}}
+          volumeMounts:
+          {{- range $name,$config := .Values.application.files.ConfigMap }}
+            {{ range $config}}
+            - name: {{ $name }}
+              mountPath: {{.mountPath}}
+              readOnly: true
+              subPath: {{.subPath}}
+          {{ end }}
+          {{end}}
+        {{end}}
+      {{- if .Values.application.files}}
+      volumes:
+      {{- range $name,$config := .Values.application.files.ConfigMap }}
+        - name: {{$name}}
+          configMap:
+            defaultMode: 0644
+            name: {{$name}}
+      {{- end }}
+      {{- end}}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app.name
+                      operator: In
+                      values:
+                        - {{ .Chart.Name }}
+                    - key: app.instance
+                      operator: In
+                      values:
+                        - {{ .Values.application.instance }}
+                topologyKey: kubernetes.io/hostname
+              weight: 100
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

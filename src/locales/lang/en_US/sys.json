@@ -1,0 +1,21 @@
+{
+  "sys": {
+    "title": "Win Solution",
+    "login": {
+      "title": "Log in",
+      "description": "Hello again, please log in to your account.",
+      "username": "Username",
+      "password": "Password",
+      "restaurant": "Restaurant",
+      "usernamePlaceholder": "Enter username",
+      "passwordPlaceholder": "Enter password",
+      "restaurantPlaceholder": "Select restaurant",
+      "loginButton": "Log in",
+      "forgot_password": "Forgot password",
+      "enter": "Enter..."
+    },
+    "expired": "Token has expired, please log in again.",
+    "notfound": "Token not found.",
+    "no_restaurant": "Restaurant not found."
+  }
+}

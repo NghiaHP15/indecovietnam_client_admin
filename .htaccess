@@ -1,0 +1,12 @@
+# Bật Rewrite Engine
+RewriteEngine On
+
+# Định nghĩa biến môi trường API_URL
+SetEnv API_URL "https://api.ws-warehouse.machitech.io/api/"
+
+# Chuyển hướng tất cả các request về index.html (dành cho React Router)
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

@@ -1,0 +1,18 @@
+categories:
+  - Xdp
+  - Sicix
+questions:
+  - variable: container.replicaCount
+    description: "Replicas count"
+    type: int
+    default: 1
+    required: true
+    label: Replicas count
+    group: "Global Settings"
+  - variable: container.health.check
+    description: "Health check after "
+    type: int
+    default: 30
+    required: true
+    label: Check
+    group: "global Settings"

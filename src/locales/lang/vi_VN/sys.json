@@ -1,0 +1,21 @@
+{
+  "sys": {
+    "title": "Win Solution",
+    "login": {
+      "title": "Đăng nhập",
+      "description": "Chào mừng trở lại, Vui lòng đăng nhập vào tài khoản của bạn.",
+      "username": "Tên tài khoản",
+      "password": "Mật khẩu",
+      "restaurant": "Nhà hàng",
+      "usernamePlaceholder": "Nhập tài khoản",
+      "passwordPlaceholder": "Nhập mật khẩu",
+      "restaurantPlaceholder": "Chọn nhà hàng",
+      "loginButton": "Đăng nhập",
+      "forgot_password": "Quên mật khẩu",
+      "enter": "Nhập..."
+    },
+    "expired": "Token đã hết hạn, vui lòng đăng nhập lại.",
+    "notfound":"Không tìm thấy token.",
+    "no_restaurant":"Không tìm thấy nhà hàng"
+  }
+}

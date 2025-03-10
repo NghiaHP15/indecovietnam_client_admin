@@ -1,0 +1,14 @@
+apiVersion: v1
+appVersion: dev-1.0.0
+description: gsht-ui
+home: https://sicix.vn
+icon: file://../logo.png
+keywords:
+- xdp
+- sicix
+maintainers:
+- email: ducta286@gmail.com
+  name: xdp
+name: gsht-ui
+type: application
+version: 1.0.0

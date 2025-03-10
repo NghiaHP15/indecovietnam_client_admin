@@ -1,0 +1,101 @@
+dockerRegistry: registry.xdp.vn:5000/
+
+application:
+  instance: sicix
+  files:
+    ConfigMap: {}
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  hosts:
+    - host: gsht.xdp.vn
+      paths:
+        - path: /(.*)
+          pathType: ImplementationSpecific
+          serviceName: gsht-ui
+          servicePort: 80
+
+container:
+  ports:
+    - name: gsht-ui
+      port: 80
+      protocol: TCP
+  replicaCount: 1
+  image:
+    repository: gsht-ui
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+  livenessProbe: |
+    failureThreshold: 3
+    initialDelaySeconds: {{ .Values.container.health.check }}
+    periodSeconds: 2
+    successThreshold: 1
+    tcpSocket:
+      port: {{ .Values.container.health.port }}
+    timeoutSeconds: 2
+  readinessProbe: |
+    failureThreshold: 3
+    initialDelaySeconds: {{ .Values.container.health.check }}
+    periodSeconds: 2
+    successThreshold: 2
+    tcpSocket:
+      port: {{ .Values.container.health.port }}
+    timeoutSeconds: 2
+  resources: {}
+
+  health:
+    check: 5
+    port: 80
+service:
+  type: ClusterIP
+  cluster:
+    - name: gsht-ui
+      protocol: TCP
+      port: 80
+      target: 80
+
+imagePullSecrets:
+  - name: docker-xdp
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 75
+  targetMemoryUtilizationPercentage: 90
+podAntiAffinity:
+  enabled: true
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  podAntiAffinity:
+    preferred: true

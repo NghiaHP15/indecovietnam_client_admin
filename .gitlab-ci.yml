@@ -1,0 +1,13 @@
+stages:
+  - dev-deploy
+
+dev-deploy:
+  stage: dev-deploy
+  tags:
+    - os
+  script:
+    - docker build --build-arg MODE=development -t registry.xdp.vn:5000/ws-storage-ui:dev-1.0.0 --rm=true  -f Dockerfile .
+    - docker push registry.xdp.vn:5000/ws-storage-ui:dev-1.0.0
+    - kubectl -n ws-storage-ui rollout restart deployment ws-storage-ui
+  only:
+    - develop
