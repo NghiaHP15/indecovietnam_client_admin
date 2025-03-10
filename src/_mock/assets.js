@@ -72,7 +72,7 @@ const DASHBOARD = {
   name: ROUTE_NAME.DashBoard,
   icon: "ic-dashboard",
   type: PermissionType.CATALOGUE,
-  route: '/',
+  route: 'dashborad',
   component: '/dashboard/workbench/index.tsx',
   order: 1,
   path: '[0]',

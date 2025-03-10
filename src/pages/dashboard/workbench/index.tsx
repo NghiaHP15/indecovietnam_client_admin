@@ -85,55 +85,18 @@ function Workbench() {
       <Row gutter={[16, 16]} className="mt-4" justify="center">
         <Col span={24} md={8}>
           <TotalCard
-            title={t("dashboard.total_product")}
-            count={totalProduct.toString()}
-            icon={productImage}
-          />
-        </Col>
+            title="Total Active Users"
+            increase
+            count="18,765"
+            percent="2.6%"
+            chartData={[22, 8, 35, 50, 82, 84, 77, 12, 87, 43]}
 
-        <Col span={24} md={8}>
-          <TotalCard
-            title={t("dashboard.total_product_price")}
-            count={totalProductPrice.toString()}
-            icon={moneyImage}
           />
         </Col>
-
-        <Col span={24} md={8}>
-          <TotalCard
-            title={t("dashboard.total_out")}
-            count={totalRecieptOutPrice.toString()}
-            icon={billImage}
-          />
-        </Col>
-        
       </Row>
-
       <Row gutter={[16, 16]} className="mt-4" justify="center">
-        <Col span={24} md={12} lg={8}>
-          <CurrentProduct />
-        </Col>
         <Col span={24} md={12} lg={16}>
           <AreaDownload />
-        </Col>
-      </Row>
-
-      <Row gutter={[16, 16]} className="mt-4" justify="center">
-        <Col span={24} md={12} lg={16}>
-          <NewInvoice />
-        </Col>
-        <Col span={24} md={12} lg={8}>
-          <TopRelated />
-        </Col>
-      </Row>
-
-      <Row gutter={[16, 16]} className="mt-4" justify="center">
-        <Col span={24} md={12}>
-          <TopInstalled />
-        </Col>
-
-        <Col span={24} md={12}>
-          <TopAuthor />
         </Col>
       </Row>
     </div>
