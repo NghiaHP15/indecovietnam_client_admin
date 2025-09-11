@@ -176,9 +176,9 @@ const INVENTORY = {
       label: 'common.menu.product',
       name: ROUTE_NAME.Product,
       type: PermissionType.MENU,
-      route: 'product',
+      route: 'products',
       order: 3,
-      component: '/inventory/product/index.tsx',
+      component: '/inventory/products/index.tsx',
       func: [
         {
           code: 'view',
@@ -207,9 +207,9 @@ const INVENTORY = {
       label: 'common.menu.category',
       name: ROUTE_NAME.Category,
       type: PermissionType.MENU,
-      route: 'category',
+      route: 'categories',
       order: 3,
-      component: '/inventory/category/index.tsx',
+      component: '/inventory/categories/index.tsx',
       func: [
         {
           code: 'view',
