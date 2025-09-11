@@ -9,6 +9,7 @@ export enum DashBoardApi {
   getNewOrder = '/dashboard/get-new-order',
   getTopProduct = '/dashboard/get-top-product',
   getOrderByMonth = '/dashboard/get-orders-by-month',
+  test="",
 }
 
 const getTotalOrder = async (data: any = {}) => await apiClient.get({ url: DashBoardApi.getTotalOrder, params: data })
@@ -19,6 +20,8 @@ const getTopCustomer = async (data: any = {}) => await apiClient.get({ url: Dash
 const getNewOrder = async (data: any = {}) => await apiClient.get({ url: DashBoardApi.getNewOrder, params: data })
 const getOrderByMonth = async (data: any = {}) => await apiClient.get({ url: DashBoardApi.getOrderByMonth, params: data })
 const getTopProduct = async (data: any = {}) => await apiClient.get({ url: DashBoardApi.getTopProduct, params: data })
+const getTest = async (data: any = {}) => await apiClient.get({ url: DashBoardApi.test, params: data })
+
 
 export {
   getTotalOrder,
@@ -28,5 +31,6 @@ export {
   getTopCustomer,
   getNewOrder,
   getOrderByMonth,
-  getTopProduct
+  getTopProduct,
+  getTest
 };

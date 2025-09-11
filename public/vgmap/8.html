@@ -1,4 +1,4 @@
-<html lang="">
+<!-- <html lang="">
 
 <head>
   <script src="vgmap.js"></script>
@@ -23,10 +23,6 @@
 </head>
 <body>
 <div class="container-fluid">
-  <!--  <form>-->
-  <!--    <label>Từ ngày</label>-->
-  <!--    <label for="from_date_iframe"></label><input type="date" id="from_date_iframe">-->
-  <!--  </form>-->
   <div class="">
     <div class="absolute top-0 left-0 z-[1000] w-1/3">
       <div class="box-header-device">
@@ -118,7 +114,6 @@
             <div id="x-tooltip-info" class="item-detail ">
 
             </div>
-            <!-- <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title='<b class="tooltest">Tooltip</b> on left'>Tooltip on left</button> -->
           </div>
         </div>
       </div>
@@ -129,30 +124,19 @@
     </div>
   </div>
 </div>
-<!--<script type="text/html" id="popup-tmpl">-->
-<!--  <ul style="padding: 0;margin:0;list-style-type:none;">-->
-<!--    <li>Biển xe: <b>{{license_plate}}</b></li>-->
-<!--    <li>Tốc độ: <b>{{speed}} km/h</b></li>-->
-<!--  </ul>-->
-<!--</script>-->
 <script>
 
-  let mapCore = new VGMap.VGMapCore('map' /* id chứa map */, {
-    center: new VGMap.VGLatLng(21.19601, 105.9536), // tâm mặc định
-    zoom: 12, // mức zoom mặc định
-    minZoom: 6, // mức zoom lớn nhất
-    maxZoom: 17, // mức zoom nhỏ nhất
-    draggable: true, // cho phép kéo thả bản đồ
-    zoomControl: false, // hiển thị thanh công cụ zoom
+  let mapCore = new VGMap.VGMapCore('map', {
+    center: new VGMap.VGLatLng(21.19601, 105.9536), 
+    zoom: 12, 
+    minZoom: 6, 
+    maxZoom: 17, 
+    draggable: true, 
+    zoomControl: false, 
   });
-  // console.log(new VGMap.VGMapCore.control);
-  // new VGMap.VGMapCore.zoomControl.zoom({
-  //   position: 'topright',
-  // }).addTo(mapCore);
-  // console.log({ mapCore });
-  new VGMap.VGTileLayer('https://tiles.gisgo.vn/base/{z}/{x}/{y}.png', { // khởi tạo class tileLayer với url trỏ tới server tile
-    enableCache: true, // cho phép cache ảnh dưới client, nếu false sẽ luôn luôn request ảnh tile mới
-    enableBuffer: true, // cho phép buffer lớp khi sử dụng với chức năng xem hành trình xe
+  new VGMap.VGTileLayer('https://tiles.gisgo.vn/base/{z}/{x}/{y}.png', { 
+    enableCache: true, 
+    enableBuffer: true, 
     visible: true,
   }).addTo(mapCore);
   let styleFunc = function(e) {
@@ -3943,7 +3927,6 @@
         let html = '';
         let randomColor = 'cl-' + Math.floor(Math.random() * 6);
         data.forEach((item, index) => {
-          // var stime = moment(d.stime, "YYYY-MM-DD HH:mm:ss").format("HH:mm:ss");
           html += `<tr class="x-row-tr" id="${item.id}" role="${index}"><td class="x-gred-td x-td-col1"><div class="x-grid-cell-inner">${item.address}</div></td><td class="x-gred-td x-td-col2"><div class="x-grid-cell-inner"><span class="${randomColor}">${item.speed} km/h</span></div></td><td class="x-gred-td x-td-col3"><div class="x-grid-cell-inner">${item.stime}</div></td></tr>`;
         });
         tbody.innerHTML = html;
@@ -3953,15 +3936,13 @@
           if (idx === 0) {
             mapCore.setCenter(new VGMap.VGLatLng(d.latitude, d.longitude), 15);
             marker = new VGMap.VGFeature({
-              bearing: d.heading, // độ nghiêng của feature
+              bearing: d.heading, 
               geometry: new VGMap.VGPoint(new VGMap.VGLatLng(d.latitude, d.longitude)),
               style: styleFunc,
               onClick: function() {
               },
               onHover: function() {
               },
-              // tooltipContent: 'Tooltip', // nội dung của tooltip
-              // popupContent: document.getElementById('popup-tmpl').innerHTML,
               attributes: d,
             }).addTo(mapCore);
             marker.showPopup();
@@ -3992,13 +3973,11 @@
                 color: 'red',
               }],
             },
-          ), // geometry dạng Polyline
+          ),
         }).addTo(mapCore);
-        //
         document.getElementById('x-btn-play').addEventListener('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
-          //
           const selectSpeed = document.getElementById('play-speed');
           let i = 0;
           let interval = setInterval(function() {
@@ -4028,8 +4007,6 @@
             } else {
               return VGMap.VGPointStyle.defaultStyle;
             }
-            // marker.setPopupContent('Speed: ' + '<b>' + speed.toString() + '</b>' + ' km/h');
-            //
             var latlng = new VGMap.VGLatLng(d.latitude, d.longitude);
             marker.setLatLng(latlng);
             marker.setAttributes(d);
@@ -4040,8 +4017,6 @@
             i++;
           }, Number(selectSpeed.value));
         });
-        // const rowHistory = document.getElementsByClassName('x-row-tr');
-        // console.log({rowHistory});
         $(document).on('mouseover', '.x-row-tr', function(e) {
           const rowHistory = document.querySelectorAll('.x-row-tr');
           rowHistory.forEach(item => {
@@ -4075,9 +4050,6 @@
           const xTooltipInfo = document.getElementById('x-tooltip-info');
           xTooltipInfo.classList.remove('x-btn-show');
         });
-        // $(document).on('scroll', '#history-device', function(e) {
-        //     console.log(e)
-        // })scrollList
         document.getElementById('history-device').addEventListener('scroll', function(e) {
           console.log(e);
         });
@@ -4096,9 +4068,7 @@
       },
     );
 </script>
-<!--<script src="./LichSuHanhTrinhController.js"></script>-->
-<!--<script src="./LichSuHanhTrinhService.js"></script>-->
 <script src="lichsu.js"></script>
 </body>
 
-</html>
+</html> -->

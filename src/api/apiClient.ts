@@ -11,11 +11,10 @@ const pendingRequests = new Map();
 
 
 const axiosInstance = axios.create({
-  // baseURL: import.meta.env.VITE_APP_BASE_API,
-  baseURL: '/api',
-  timeout: 5000,
+  baseURL: import.meta.env.VITE_APP_BASE_API,
+  timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
-  // withCredentials: true
+  withCredentials: true
 });
 
 axiosInstance.interceptors.request.use(
