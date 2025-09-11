@@ -9,10 +9,11 @@ import { ResultEnum } from '#/enum';
 
 const pendingRequests = new Map();
 
-const isDev = import.meta.env.DEV;
+// const isDev = import.meta.env.DEV;
 
 const axiosInstance = axios.create({
-  baseURL:  isDev ? '/api' : import.meta.env.VITE_APP_BASE_API,
+  // baseURL:  isDev ? '/api' : import.meta.env.VITE_APP_BASE_API,
+  baseURL: '/api',
   timeout: 5000,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
