@@ -2,32 +2,21 @@ version: '3.9'
 
 services:
   app:
-    image: node:16-alpine # Replace with your preferred Node.js version or application image
-    container_name: vite_app
+    image: node:22-alpine # Replace with your preferred Node.js version or application image
+    container_name: indeco_admin
     working_dir: /app
     volumes:
       - .:/app
       - /app/node_modules
+    build:
+      context: .
+      args:
+        VITE_APP_BASE_API: https://indecovietnam-backend.onrender.com/api/
+        VITE_APP_HOMEPAGE: /
     ports:
-      - "3000:3000" # Expose the app on port 3000 (or replace with the appropriate port)
+      - "3000:80" # Expose the app on port 3000 (or replace with the appropriate port)
     environment:
-      VITE_APP_BASE_API: "https://dev-control-center.xdp.vn/api"
+      VITE_APP_BASE_API: https://indecovietnam-backend.onrender.com/api/
       # VITE_APP_BASE_API: "http://localhost:1234/api" # Uncomment for local API
-      VITE_APP_HOMEPAGE: "/"
-      VITE_APP_GG_API_KEY: "AIzaSyD96pS--0mUjAwp4AdFhFAnYKQdkVpR26k"
-      VITE_APP_WINDY_API_KEY: "BoF5EQPTv7FXrME49Cw2Fubij0mWxzwe"
-    command: ["sh", "-c", "npm install && npm run dev"]
-    depends_on:
-      - backend
-
-  backend:
-    image: your-backend-image:latest # Replace with your backend image
-    container_name: backend_service
-    ports:
-      - "1234:1234" # Match the backend API port
-    environment:
-      NODE_ENV: "development"
-    volumes:
-      - ./backend:/backend
-      - /backend/node_modules
-    command: ["npm", "start"]
+      VITE_APP_HOMEPAGE: /
+    

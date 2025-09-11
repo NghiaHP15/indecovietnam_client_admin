@@ -9,16 +9,20 @@ import { ResultEnum } from '#/enum';
 
 const pendingRequests = new Map();
 
+const isDev = import.meta.env.DEV;
+
 const axiosInstance = axios.create({
-  baseURL:  import.meta.env.VITE_APP_BASE_API,
-  timeout: 50000,
+  baseURL:  isDev ? '/api' : import.meta.env.VITE_APP_BASE_API,
+  timeout: 5000,
   headers: { 'Content-Type': 'application/json' },
+  withCredentials: true
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
     // @ts-ignore
     const token = JSON.parse(localStorage.getItem('token'));
+    
     if (token)
       config.headers.Authorization = `Bearer ${token}`;
     if (config?.data?.cancelToken) {
@@ -103,6 +107,8 @@ function removePendingRequest(config: any) {
 
 axiosInstance.interceptors.response.use(
   (res: AxiosResponse<Result>) => {
+    console.log(res);
+    
     removePendingRequest(res.config);
     if (!res.data) throw new Error(t('sys.api.apiRequestFailed'));
     const { data, success } = res.data;
