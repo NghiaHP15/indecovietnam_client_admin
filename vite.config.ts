@@ -7,9 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // https://vitejs.dev/config/
-export default defineConfig(({mode}) =>{
-  
-  return {
+export default defineConfig({
     base: './',
     esbuild: {
       // drop: ['console', 'debugger'],
@@ -57,5 +55,4 @@ export default defineConfig(({mode}) =>{
         },
       },
     },
-  }
 });
