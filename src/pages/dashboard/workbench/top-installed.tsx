@@ -1,86 +1,33 @@
-import { Typography } from 'antd';
-import { ReactNode } from 'react';
+import { Avatar, Typography } from 'antd';
+import { useEffect, useState } from 'react';
 
 import Card from '@/components/card';
-import { Iconify } from '@/components/icon';
+import { no_image } from '@/assets/images';
+import { useTranslation } from 'react-i18next';
+import { fCurrencyVN } from '@/utils/format-number';
 
-const dataSource = [
-  {
-    country: 'Germany',
-    iconify: 'twemoji:flag-germany',
-    android: '9.91k',
-    windows: '1.95k',
-    ios: '1.95k',
-  },
-  {
-    country: 'China',
-    iconify: 'twemoji:flag-china',
-    android: '1.95k',
-    windows: '9.25k',
-    ios: '7.95k',
-  },
-  {
-    country: 'Australia',
-    iconify: 'twemoji:flag-australia',
-    android: '3.91k',
-    windows: '2.95k',
-    ios: '4.95k',
-  },
-  {
-    country: 'France',
-    iconify: 'twemoji:flag-france',
-    android: '3.28k',
-    windows: '2.29k',
-    ios: '8.95k',
-  },
-  {
-    country: 'USA',
-    iconify: 'twemoji:flag-united-states',
-    android: '8.81k',
-    windows: '7.05k',
-    ios: '4.35k',
-  },
-];
+export default function TopInstalled( { data }: { data: any } ) {
+  const { t } = useTranslation();
+  const [products, setProducts] = useState([]);
 
-const platformIcon = (platform: string) => {
-  let iconify: ReactNode;
-  if (platform === 'android') {
-    iconify = <Iconify icon="uiw:android" />;
-  }
-  if (platform === 'windows') {
-    iconify = <Iconify icon="mingcute:windows-fill" />;
-  }
-  iconify = <Iconify icon="wpf:mac-os" />;
+  useEffect(() => {
+    setProducts(data);
+  }, [data]);
 
-  return <div className="mr-1 text-xs text-gray">{iconify}</div>;
-};
-export default function TopInstalled() {
   return (
     <Card className="flex-col">
       <header className="self-start">
-        <Typography.Title level={5}>Top Installed Countries</Typography.Title>
+        <Typography.Title level={5}>{t('dashboard.top_products')}</Typography.Title>
       </header>
       <main className="w-full">
-        {dataSource.map((item) => (
-          <div className="mb-4 flex items-center" key={item.country}>
-            <Iconify icon={item.iconify} size={30} />
-            <span className="mx-2 font-medium">{item.country}</span>
-            <div className="ml-auto flex">
-              <div className="flex items-center justify-center">
-                {platformIcon('android')}
-                {item.android}
-              </div>
-
-              <div className="mx-2 flex items-center justify-center">
-                {platformIcon('windows')}
-                {item.windows}
-              </div>
-
-              <div className="flex items-center justify-center">
-                {platformIcon('ios')}
-                {item.ios}
-              </div>
+        {products.map((item: any) => (
+          <div className="mb-[18px] flex items-center justify-between" key={item.id}>
+            <div className="flex items-center gap-3">
+              <Avatar src={item.image || no_image} shape='square' size={50} />
+              <span className="mx-2 font-medium font-roboto">{item.sku}</span>
+              <span className='rounded-full' style={{ backgroundColor: item.color.code, height: '15px', width: '15px' }}></span>
             </div>
+            <span className="mx-2 font-medium font-roboto">{fCurrencyVN(item.price)}</span>
           </div>
         ))}
       </main>

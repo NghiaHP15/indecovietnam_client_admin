@@ -12,6 +12,7 @@
 
 .ant-app {
   height: 100%;
+  font-family: "Roboto Condensed", sans-serif  !important;
 }
 
 .super-hidden {
@@ -20,6 +21,7 @@
 
 .q-region {
   display: grid;
+  font-family: "Roboto Condensed", sans-serif  !important;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -53,6 +55,7 @@
 .ant-table-wrapper {
   height: 100%;
   overflow: auto;
+  font-family: "Roboto Condensed", sans-serif  !important;
 }
 
 .ant-table-wrapper .ant-spin-nested-loading,
@@ -68,6 +71,7 @@
 .ant-table-wrapper .ant-table {
   flex: 1;
   overflow: hidden;
+  font-family: "Roboto Condensed", sans-serif  !important;
 }
 
 .ant-table-wrapper .ant-table-container {
@@ -79,6 +83,10 @@
 
 .ant-table-wrapper .ant-table-body {
   flex: 1;
+}
+
+.ant-table-wrapper .ant-table-content {
+  overflow: auto !important;
 }
 
 /*------------- Replace table full view end-------------*/
@@ -223,4 +231,41 @@
 .ant-table-body {
   overflow-x: auto !important;
   scrollbar-width: thin;
+}
+
+.font-roboto {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+/* Form ant design */
+.ant-form-item{
+  margin-bottom: 15px !important;
+}
+.ant-form-item-label {
+  padding-bottom: 2px !important;
+}
+
+/* Notification ant design */
+.ant-notification-notice{
+  padding: 15px 25px !important;
+}
+
+/* Table ant design */
+.table-expanded .ant-table{
+  margin: 0 !important;
+}
+
+.ant-drawer-title,
+.ant-tabs-nav-list,
+.ant-popconfirm-title,
+.ant-typography,
+.ant-notification-notice-content,
+.ant-form-item-explain-error,
+.ant-form-item-label,
+.ant-modal,
+.ant-select-dropdown,
+.ant-select,
+.ant-input,
+.ant-btn {
+  font-family: "Roboto Condensed", sans-serif  !important;
 }

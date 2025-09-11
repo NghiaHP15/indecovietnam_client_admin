@@ -1,6 +1,6 @@
 import { Typography, Upload } from 'antd';
 import { UploadChangeParam, UploadFile, UploadProps } from 'antd/es/upload';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { fBytes } from '@/utils/format-number';
 
@@ -8,15 +8,23 @@ import { Iconify } from '../icon';
 
 import { StyledUploadAvatar } from './styles';
 import { beforeAvatarUpload, getBlobUrl } from './utils';
+import { LoadingOutlined } from '@ant-design/icons';
 
 interface Props extends UploadProps {
   defaultAvatar?: string;
+  loading?: boolean;
   helperText?: React.ReactElement | string;
 }
-export function UploadAvatar({ helperText, defaultAvatar = '', ...other }: Props) {
+export function UploadAvatar({ helperText, defaultAvatar = '', loading = false, ...other }: Props) {
   const [imageUrl, setImageUrl] = useState<string>(defaultAvatar);
 
   const [isHover, setIsHover] = useState(false);
+
+  useEffect(() => {
+    if(defaultAvatar)
+    setImageUrl(defaultAvatar);
+  },[defaultAvatar])
+
   const handelHover = (hover: boolean) => {
     setIsHover(hover);
   };
@@ -46,14 +54,27 @@ export function UploadAvatar({ helperText, defaultAvatar = '', ...other }: Props
     </div>
   );
 
+  const renderLoading = (
+    <div
+      style={{
+        backgroundColor: !imageUrl || isHover ? 'rgba(22, 28, 36, 0.15)' : 'transparent',
+        color: '#fff',
+      }}
+      className="absolute z-10 flex h-full w-full flex-col items-center justify-center"
+    >
+      <LoadingOutlined className='text-3xl font-bold' />
+    </div>
+  )
+
   const renderContent = (
     <div
       className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full"
       onMouseEnter={() => handelHover(true)}
       onMouseLeave={() => handelHover(false)}
     >
+      {loading ? renderLoading : null}
       {imageUrl ? renderPreview : null}
-      {!imageUrl || isHover ? renderPlaceholder : null}
+      {!loading && (!imageUrl || isHover) ? renderPlaceholder : null}
     </div>
   );
 
@@ -68,7 +89,7 @@ export function UploadAvatar({ helperText, defaultAvatar = '', ...other }: Props
   return (
     <StyledUploadAvatar>
       <Upload
-        name="avatar"
+        name="image"
         showUploadList={false}
         listType="picture-circle"
         className="avatar-uploader !flex items-center justify-center"

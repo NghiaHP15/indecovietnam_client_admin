@@ -36,7 +36,7 @@ var vite_config_default = defineConfig({
     port: 3001,
     proxy: {
       "/api": {
-        target: process.env.VITE_APP_BASE_API || "http://localhost:3000",
+        target: process.env.VITE_APP_BASE_API || "http://localhost:5000",
         changeOrigin: true,
         rewrite: (path2) => path2.replace(/^\/api/, "")
       }

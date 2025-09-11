@@ -12,26 +12,23 @@ interface Props extends ReactQuillProps {
 export default function Editor({ id = 'slash-quill', sample = false, ...other }: Props) {
   const token = useThemeToken();
   const { themeMode } = useSettings();
-  // const modules = {
-  //   toolbar: {
-  //     container: `#${id}`,
-  //   },
-  //   history: {
-  //     delay: 500,
-  //     maxStack: 100,
-  //     userOnly: true,
-  //   },
-  //   syntax: true,
-  //   clipboard: {
-  //     matchVisual: false,
-  //   },
-  // };
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
+      ["bold", "italic", "underline"],
+      [{ color: [] }, { background: [] }],
+      [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+      [{ align: [] }],
+      ["link", "image", "code-block"],
+      ["clean"],
+    ],
+  };
   return (
     <StyledEditor $token={token} $thememode={themeMode}>
-      {/*<Toolbar id={id} isSimple={sample} />*/}
       <ReactQuill
-        // modules={modules}
+        className='rounded-md'
         formats={formats}
+        modules={modules}
         {...other}
         placeholder=""
       />

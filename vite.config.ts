@@ -37,9 +37,10 @@ export default defineConfig({
     port: 3001,
     proxy: {
       '/api': {
-        target: process.env.VITE_APP_BASE_API || 'http://localhost:3000',
+        // target: 'http://localhost:5000',
+        target: 'https://indecovietnam-backend.onrender.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api/, '/api')
       },
     },
   },

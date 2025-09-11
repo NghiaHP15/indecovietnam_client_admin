@@ -47,6 +47,8 @@
     "title_cancel": "Do you want to cancel?",
     "error_required": "Data cannot be empty!",
     "hello": "Hello",
+    "showing": "Showing",
+    "hide_column": "Hide column",
     "login": {
       "logout": "Logout",
       "login": "Login"
@@ -97,6 +99,20 @@
       "logout": "Logout"
     }
   },
+  "dashboard": {
+    "sales": "Sales",
+    "sale_returns": "Sale Returns",
+    "purchases": "Purchases",
+    "purchases_returns": "Purchases Returns",
+    "expenses": "Expenses",
+    "users": "Users",
+    "customers": "Customers",
+    "suppilers": "Suppliers",
+    "in_out_purchase": "In Out Purchases",
+    "today": "Today",
+    "this_month": "This month",
+    "this_year": "This year"
+  },
   "setting": {
     "install_application": {
       "general": "General",
@@ -140,6 +156,13 @@
     },
     "theme": {
       "color": "Color Theme"
+    },
+    "role": {
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "created_at": "Created At",
+      "updated_at": "Updated At"
     }
   }
 }

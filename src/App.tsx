@@ -13,7 +13,7 @@ function App() {
       <AntdApp>
         <MotionLazy>
           <Helmet>
-            <title>Win Solution</title>
+            <title>Indeco VietNam</title>
             <link rel="icon" href={Logo} />
           </Helmet>
           <Router />

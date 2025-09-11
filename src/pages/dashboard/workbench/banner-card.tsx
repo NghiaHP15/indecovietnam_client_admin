@@ -1,13 +1,12 @@
 import { Col, Row } from 'antd';
 import Color from 'color';
-
 import Character3 from '@/assets/images/characters/character_3.png';
 import { Iconify } from '@/components/icon';
-import { useUserInfo } from '@/store/userStore';
+// import { useUserInfo } from '@/store/userStore';
 import { useThemeToken } from '@/theme/hooks';
 
 export default function BannerCard() {
-  const { userName } = useUserInfo();
+  // const { fullname } = useUserInfo();
   const themeToken = useThemeToken();
 
   const bg = `linear-gradient(135deg, ${Color(themeToken.colorPrimaryHover).alpha(0.2)}, ${Color(
@@ -26,34 +25,33 @@ export default function BannerCard() {
           className="mt-4 text-lg font-semibold md:text-xl"
           style={{ color: themeToken.colorPrimaryActive }}
         >
-          <h4>Welcome back 👋 </h4>
-          <h4>{userName}</h4>
+          <h4>Welcome back👋 </h4>
         </div>
         <div
           style={{ color: themeToken.colorPrimaryTextActive }}
-          className="mx-auto mb-6 mt-4 max-w-sm text-sm opacity-80 md:mx-0"
+          className="mx-auto mb-6 mt-5 max-w-sm text-sm opacity-80 md:mx-0"
         >
-          Welcome to join the Discord channel to discuss everything about Slash Admin, or you can
-          visite my blog:
+          Chào mừng bạn tham gia kênh Facebook để thảo luận mọi thứ về Slash Admin, hoặc bạn có thể
+          truy cập blog của tôi:
           <div>
             <a
-              href="https://blog.slashspaces.com"
+              href="https://www.facebook.com/profile.php?id=61576607768367"
               target="_blank"
               className="text-base opacity-80"
               style={{ color: themeToken.colorPrimaryTextActive }}
               rel="noreferrer"
             >
-              👉 https://blog.slashspaces.com
+              👉 Link facebook
             </a>
           </div>
         </div>
         <button
           className="font-mediumtext-black m-auto flex items-center justify-center rounded-lg px-2 py-1 shadow-none md:m-0"
           style={{ backgroundColor: themeToken.colorPrimary, color: '#fff' }}
-          onClick={() => window.open('https://discord.gg/fXemAXVNDa')}
+          onClick={() => window.open('https://indecovietnam-client.vercel.app/')}
         >
-          <Iconify icon="carbon:logo-discord" size={24} />
-          <span className="ml-2 font-black">Join Discord</span>
+          <Iconify icon="streamline-plump:web-solid" size={24} />
+          <span className="ml-2 font-black">Website Indeco</span>
         </button>
       </Col>
 

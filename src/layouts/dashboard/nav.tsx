@@ -26,8 +26,10 @@ export default function Nav(props: Props) {
   const { themeLayout } = settings;
   const { setSettings } = useSettingActions();
 
+  const colorBgMenu: string = '#131313';
+
   const menuStyle: CSSProperties = {
-    background: colorBgBase,
+    background: colorBgMenu,
   };
 
   const routeToMenuFn = useRouteToMenuFn();
@@ -102,7 +104,7 @@ export default function Nav(props: Props) {
     <div
       className="flex h-full flex-col transition-all transition-duration-300"
       style={{
-        background: colorBgBase,
+        background: colorBgMenu,
         width: collapsed ? NAV_COLLAPSED_WIDTH : NAV_WIDTH,
       }}
     >

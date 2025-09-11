@@ -1,17 +1,13 @@
 import {
   CloseOutlined,
-  FullscreenExitOutlined,
-  FullscreenOutlined,
   LeftOutlined,
   QuestionCircleOutlined,
   RightOutlined,
-  SunFilled,
 } from '@ant-design/icons';
 import { Avatar, Button, Card, Drawer, Switch, Tooltip } from 'antd';
 import Color from 'color';
 import { m } from 'framer-motion';
 import { CSSProperties, useState } from 'react';
-import { MdCircle } from 'react-icons/md';
 import screenfull from 'screenfull';
 
 // import CyanBlur from '@/assets/images/background/cyan-blur.png';
@@ -25,9 +21,6 @@ import moon from "@/assets/images/icon/moon.png";
 
 import { ThemeColorPresets, ThemeLayout, ThemeMode } from '#/enum';
 import { useTranslation } from 'react-i18next';
-import { bo } from 'node_modules/@fullcalendar/core/internal-common';
-import { none } from 'ramda';
-import { varHover } from '@/components/animate/variants';
 
 /**
  * App Setting
@@ -111,17 +104,17 @@ export default function SettingButton() {
     <>
       <div className="flex items-center justify-center cursor-pointer">
         <m.div
-          animate={{
-            rotate: [0, drawerOpen ? 0 : 360],
-          }}
-          transition={{
-            duration: 12,
-            ease: 'linear',
-            repeat: Infinity,
-          }}
-          whileTap="tap"
-          whileHover="hover"
-          variants={varHover(1.05)}
+          // animate={{
+          //   rotate: [0, drawerOpen ? 0 : 360],
+          // }}
+          // transition={{
+          //   duration: 12,
+          //   ease: 'linear',
+          //   repeat: Infinity,
+          // }}
+          // whileTap="tap"
+          // whileHover="hover"
+          // variants={varHover(1.05)}
           onClick={() => setDrawerOpen(true)}
         >
           <SvgIcon icon="ic-theme" size="42" />

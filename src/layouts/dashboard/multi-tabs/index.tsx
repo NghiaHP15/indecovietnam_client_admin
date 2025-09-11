@@ -66,7 +66,7 @@ export default function MultiTabs({ offsetTop = false }: Props) {
         const defaultLabel = t(tab.label);
         if (userId) {
           const user = USER_LIST.find((item) => item.id === userId);
-          return `${user?.username}-${defaultLabel}`;
+          return `${user?.email}-${defaultLabel}`;
         }
         return defaultLabel;
       },

@@ -1,18 +1,17 @@
 import apiClient from "../apiClient";
 
 export enum ProductApi {
-  internalProducts = '/internal/product',
-  internalSupplierproduct = "/internal/supplierproduct",
-  syncProducts = "/internal/product/sync"
-
-
+  internalProducts = '/product',
 }
 
-const internalProducts = async (data: any = {}) => await apiClient.get({ url: ProductApi.internalProducts, params: data })
-const internalSupplierproduct = async (data: any = "") => await apiClient.get({ url: `${ProductApi.internalSupplierproduct}/${data}`})
-const syncProducts = async () => await apiClient.get({ url: ProductApi.syncProducts})
-export default {
+const internalProducts = async (data: any = {}) => await apiClient.get({ url: ProductApi.internalProducts, params: data });
+const createProduct = async (data: any = {}) => await apiClient.post({ url: ProductApi.internalProducts, data });
+const updateProduct = async (id: string, data: any = {}) => await apiClient.put({ url: `${ProductApi.internalProducts}/${id}`, data: data});
+const deleteProduct = async (id: string) => await apiClient.delete({ url: `${ProductApi.internalProducts}/${id}`});
+
+export {
   internalProducts,
-  internalSupplierproduct,
-  syncProducts
+  createProduct,
+  updateProduct,
+  deleteProduct
 };

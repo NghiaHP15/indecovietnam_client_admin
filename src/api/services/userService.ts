@@ -1,5 +1,5 @@
 import apiClient from '../apiClient';
-import { User, UserInfo } from '#/entity';
+import { UserInfo } from '#/entity';
 
 export interface SignInReq {
   username: string;
@@ -53,8 +53,6 @@ export interface LoginResponse{
 }
 
 export enum UserApi {
-  SignIn = '/internal/auth/login',
-  AutoLogin ='internal/auth/auto-login',
   SignUp = '/auth/signup',
   Logout = '/auth/logout',
   Refresh = '/auth/refresh',
@@ -62,8 +60,6 @@ export enum UserApi {
   update = '/info',
 }
 
-const signin = (data: LoginRequest) => apiClient.post<LoginResponse>({url: UserApi.SignIn , data});
-const autoLogin = (data: LoginRequest) => apiClient.post<LoginResponse>({url: UserApi.AutoLogin , data});
 const signup = (data: SignUpReq) => apiClient.post<SignInRes>({ url: UserApi.SignUp, data });
 const logout = () => apiClient.get({ url: UserApi.Logout });
 const findById = (username: string) => apiClient.get<UserInfo[]>({ url: `${UserApi.User}/${username}` });
@@ -73,7 +69,6 @@ const searchUser = (data: any) => apiClient.post<UserInfo[]>({
 });
 const updateUser = (id: string, data: any) => apiClient.put({ url: `${UserApi.User}/${id}`, data});
 const deleteUser = (id: string) => apiClient.delete({ url: `${UserApi.User}/${id}`});
-const createUser = (data: User) => apiClient.post({ url: UserApi.User, data });
 const updatePassWord = (data: UserInfo) =>
   apiClient.post<UserInfo[]>({
     url: `${UserApi.User}/update-password`,
@@ -96,31 +91,14 @@ const getAllUser = (data: any = {}) => apiClient.get({url: UserApi.User, data});
 
 
 export default {
-  signin,
-  autoLogin,
   signup,
   findById,
   logout,
   searchUser,
   updateUser,
   deleteUser,
-  createUser,
   updatePassWord,
   changeState,
   getRoleByUser,
   getAllUser,
-  exportExcel: () => apiClient.get<UserInfo[]>({
-    url: `${UserApi.User}/export/users`
-  }),
-  import: (data: any) => apiClient.post<any[]>({
-    url: `${UserApi.User}/import`,
-    data
-  }),
-  internalRole: () => apiClient.get<UserInfo[]>({
-    url: `/internal/role`
-  }),
-  internalUserById: (id: string) => apiClient.get<UserInfo[]>({
-    url: `/internal/user/${id}`
-  }),
-  
 };

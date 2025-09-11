@@ -2,7 +2,7 @@
 RewriteEngine On
 
 # Định nghĩa biến môi trường API_URL
-SetEnv API_URL "https://api.ws-warehouse.machitech.io/api/"
+SetEnv API_URL "http://localhost:5000"
 
 # Chuyển hướng tất cả các request về index.html (dành cho React Router)
 RewriteBase /

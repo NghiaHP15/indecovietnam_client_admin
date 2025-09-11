@@ -56,11 +56,11 @@ const themeModeToken: Record<'dark' | 'light', ThemeConfig> = {
   dark: {
     token: {
       colorBgLayout: '#000000e0',
-      colorBgContainer: '#000',
-      colorBgElevated: '#000000e0',
-      colorBgBase: '#131313',
+      colorBgContainer: '#131313',
+      colorBgElevated: '#1c1c1c',
+      // colorBgBase: '#131313',
       colorPrimaryBg: "#131313",
-      colorBorder: "#DBE0E4"
+      colorBorder: "#DBE0E4",
     },
     components: {
       Modal: {

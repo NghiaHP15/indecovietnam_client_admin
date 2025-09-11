@@ -1,5 +1,5 @@
 import Icons from '@/assets/icons';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 type IconProps = React.HTMLAttributes<SVGElement>;
 interface ButtonIconProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,7 +18,7 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
   href,
   ...props
 }) => {
-  const bgButton = typeIcon == 'delete' ? '#2B2B2B1A' : '#0074FF1A';
+  const bgButton = typeIcon == 'delete' ? '#ff00001a' : '#0074FF1A';
 
   let icon;
   switch (typeIcon) {
@@ -26,7 +26,7 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
       icon = <Icons.Paint {...styleIcon} />;
       break;
     case 'delete':
-      icon = <Icons.Trash {...styleIcon} />;
+      icon = <Icons.Trash {...styleIcon}/>;
       break;
     default:
       icon = <Icons.Eye {...styleIcon} />;

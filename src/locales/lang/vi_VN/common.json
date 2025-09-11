@@ -38,6 +38,7 @@
     "layout": "Bố cục",
     "stretch": "Stretch",
     "presets": "Presets",
+    "please": "Vui lòng nhập",
     "page": "Trang",
     "breadcrumb": "Breadcrumb",
     "multitab": "Multitab",
@@ -45,8 +46,18 @@
     "sync_success": "Đồng bộ dữ liệu thành công",
     "title_delete": "Bạn có muốn xóa?",
     "title_cancel": "Bạn có muốn hủy?",
+    "description_delete": "Bạn chắc chắn có muốn xóa dữ liệu này?",
     "error_required":"Dữ liệu không được để trống!",
     "hello": "Xin chào",
+    "newest": "Mới nhất",
+    "oldest": "Cũ nhất",
+    "male": "Nam",
+    "female": "Nữ",
+    "other": "Khác",
+    "enlarge": "Phóng to",
+    "reduce": "Thu nhỏ",
+    "showing": "Hiển thị",
+    "hide_column": "Ẩn cột",
     "login": {
       "logout": "Đăng xuất",
       "login": "Đăng nhập"
@@ -63,7 +74,6 @@
       "add_quotation": "Thêm báo giá",
       "all_quotation": "Tất cả các trích dẫn",
       "inventory": "Kho hàng",
-      "product": "Sản phẩm",
       "category": "Danh mục",
       "sub_category": "Danh mục con",
       "historical_price": "Lịch sử giá",
@@ -84,9 +94,25 @@
       "product_report": "Báo cáo sản phẩm",
       "customer_report": "Báo cáo khách hàng",
       "supplier_report": "Báo cáo nhà cung cấp",
+      "employee": "Nhân viên",
+      "website": "Website",
+      "product": "Sản phẩm",
+      "product_variant": "Biến thể sản phẩm",
+      "product_category": "Danh mục sản phẩm",
+      "room-category": "Danh mục phòng",
+      "blog": "Bài viết",
+      "blog-category": "Danh mục bài viết",
+      "service": "Dịch vụ",
+      "service-category": "Danh mục dịch vụ",
+      "gallery": "Thư viện",
+      "feedback": "Phản hồi",
+      "menu": "Menu",
+      "color": "Màu sản phẩm",
+      "address": "Địa chỉ",
       "setting": "Cài đặt",
       "install_application": "Cài đặt ứng dụng",
       "role": "Vai trò",
+      "image": "Hình ảnh",
       "template": "Mẫu",
       "storage": "Kho hàng",
       "tax": "Thuế suất",
@@ -94,7 +120,380 @@
       "language": "Ngôn ngữ",
       "account": "Tài khoản",
       "profile": "Hồ sơ",
-      "logout": "Đăng xuất"
+      "logout": "Đăng xuất",
+      "management": "Quản lý"
+    }
+  },
+  "dashboard": {
+    "sales": "Doanh thu",
+    "orders": "Đơn hàng",
+    "products": "Sản phẩm",
+    "sale_returns": "Hoản hồi",
+    "purchases": "Nhập kho",
+    "purchases_returns": "Xuất kho",
+    "expenses": "Chi phí",
+    "users": "Người dùng",
+    "customers": "Khách hàng",
+    "suppilers": "Nhà cung cấp",
+    "in_out_purchase": "Sản phẩm xuất nhập kho",
+    "today": "Hôm nay",
+    "this_month": "Tháng này",
+    "this_year": "Năm nay",
+    "revenere": "Doanh thu bán hàng",
+    "top_customers": "Khách hàng tiêu biểu",
+    "top_products": "Sản phẩm bán chạy",
+    "new_order": "Đơn hàng mới"
+  },
+  "management": {
+    "customer": {
+      "field": {
+        "firstname": "Tên",
+        "lastname": "Họ",
+        "avatar": "Ảnh đại diện",
+        "email": "Email",
+        "phone": "Số điện thoại",
+        "gender": "Giới tính",
+        "date_of_birth": "Ngày sinh",
+        "level": "Level",
+        "provider": "Phương thức",
+        "password": "Mật khẩu"
+      },
+      "level": {
+        "silver": "Silver",
+        "gold": "Gold",
+        "vip": "Vip"
+      },
+      "provider": {
+        "local": "Local",
+        "facebook": "Facebook",
+        "google": "Google"
+      },
+      "error": {
+        "firstname": "Tên khách hàng không được phép trống",
+        "lastname": "Họ khách hàng không được phép trống",
+        "email": "Email không được phép trống",
+        "phone": "Số diện thoại không được phép trống"
+      },
+      "create": "Thêm khách hàng",
+      "list_order": "Danh sách đơn hàng",
+      "list_address": "Danh sách điểm giao hàng"
+    },
+    "order": {
+      "field": {
+        "txnref": "Mã đơn hàng",
+        "customer": "Khách hàng",
+        "note": "Mô tả",
+        "paymentmethod": "Phương thức TT",
+        "payment_status": "Trạng thái TT",
+        "status": "Trạng thái",
+        "order_date": "Ngày đơn hàng",
+        "order_code": "Mã đơn hàng",
+        "address": "Địa chỉ",
+        "total_amount": "Tổng tiền"
+      },
+      "detail": {
+        "txnref": "Mã đơn hàng",
+        "firstname": "Tên",
+        "lastname": "Họ",
+        "email": "Email",
+        "total_amount": "Tổng tiền",
+        "customer": "Khách hàng",
+        "note": "Ghi chú thêm",
+        "order_date": "Ngày tạo đơn",
+        "address": "Địa chỉ",
+        "receiver_name":"Tên người nhận",
+        "phone":"Số diện thoại",
+        "list_product": "Danh sách sản phẩm",
+        "add_customer": "Thêm khách hàng mới",
+        "address_note": "Dùng '-' ngăn cách",
+        "order_product": "Sản phẩm",
+        "order_variant": "Biến thể",
+        "quantity": "Số lượng",
+        "total_price": "Tổng giá",
+        "total": "Tổng giá sản phẩm",
+        "total_shipping": "Phí vận chuyển",
+        "paymentmethod":"Phương thức thanh toán",
+        "phipping_method": "Vận chuyển tận nơi"
+      },
+      "payment_status": {
+        "pending": "Chưa thanh toán",
+        "paid": "Đã thanh toán",
+        "awaiting_confirmation": "Đợi xác nhận",
+        "cancelled": "Bị hủy",
+        "failed": "Thất bại"
+      },
+      "order_status": {
+        "pending": "Chưa xác nhận",
+        "processing": "Đang xử lý",
+        "shipped": "Đang giao",
+        "delivered": "Đã hóa",
+        "cancelled": "Bị hủy"
+      },
+      "create": "Tạo đơn hàng",
+      "error": {
+        "customer": "Khách hàng không được phép trống",
+        "receiver_name": "Tên người nhận không được phép trống",
+        "phone":"Số điện thoại không được phép trống",
+        "address":"Địa chỉ không được phép trống",
+        "products": "Sản phẩm không được phép trống"
+      },
+      "view": {
+        "detail_order": "Chi tiết đơn hàng",
+        "information_order": "Thông tin đơn hàng",
+        "information_payment": "Thông tin thanh toán",
+        "information_customer": "Thông tin khách hàng"
+      }
+    },
+    "employee": {
+      "field": {
+        "fullname": "Tên",
+        "avatar": "Hình ảnh",
+        "email": "Email",
+        "phone": "Số diện thoại",
+        "gender": "Giới tính",
+        "date_of_birth": "Ngày sinh",
+        "address": "Địa chỉ",
+        "status_active": "Trạng thái",
+        "position": "Vi trí",
+        "role": "Vai trò",
+        "password": "Mật khẩu"
+      },
+      "create": "Thêm nhân viên",
+      "error": {
+        "fullname": "Tên nhân viên không được phép trống",
+        "email": "Email không được phép trống",
+        "phone": "Số diện thoại không được phép trống"
+      },
+      "status_active": {
+        "active": "Hoạt động",
+        "inactive": "Khóa"
+      },
+      "position": {
+        "ceo": "Giám đốc",
+        "manager": "Quản lý",
+        "staff": "Nhân viên",
+        "cskh": "Cskh",
+        "other": "Khác"
+      }
+    }
+  },
+  "website": {
+    "blog": {
+      "field": {
+        "title": "Tiêu đề",
+        "slug": "Đường dẫn",
+        "image": "Hình ảnh",
+        "description": "Mô tả",
+        "published_at": "Ngày phát hành",
+        "category":"Danh mục",
+        "author": "Tác giả",
+        "tag": "Tag",
+        "body": "Nội dung",
+        "latest_blog": "Bài nổi bật"
+      },
+      "tag-log": "Dùng ',' giữa tag",
+      "error": {
+        "title": "Tiêu đề không được để trống",
+        "description": "Mô tả không được để trống",
+        "category": "Danh mục không được để trống",
+        "author": "Tác giả không được để trống"
+      }
+    },
+    "blog-category": {
+      "title": "Tiêu đề",
+      "slug": "Đường dẫn",
+      "description": "Mô tả"
+    },
+    "service": {
+      "field": {
+        "title": "Tiêu đề",
+        "slug": "Đường dẫn",
+        "image": "Hình ảnh",
+        "description": "Mô tả",
+        "published_at": "Ngày phát hành",
+        "category":"Danh mục",
+        "tag": "Tag",
+        "body": "Nội dung"
+      },
+      "tag-log": "Dùng ',' giữa tag",
+      "error": {
+        "title": "Tiêu đề không được để trống",
+        "description": "Mô tả không được để trống",
+        "category": "Danh mục không được để trống"
+      }
+    },
+    "service-category": {
+      "title": "Tiêu đề",
+      "slug": "Đường dẫn",
+      "description": "Mô tả"
+    },
+    "room-category": {
+      "field": {
+        "title": "Tiêu đề",
+        "slug": "Đường dẫn",
+        "description": "Mô tả",
+        "image": "Hình ảnh",
+        "featured": "Nổi bật"
+      },
+      "create": "Thêm phòng",
+      "error": {
+        "title": "Tiêu đề không được phép trống"
+      }
+    },
+    "product-category": {
+      "field": {
+        "title": "Tiêu đề",
+        "slug": "Đường dẫn",
+        "description": "Mô tả",
+        "room-category": "Phòng",
+        "image": "Hình ảnh",
+        "featured": "Nổi bật"
+      },
+      "create": "Thêm danh mục",
+      "error": {
+        "title": "Tiêu đề không được phép trống",
+        "room-category": "Phòng không được phép trống"
+      }
+    },
+    "product": {
+      "field": {
+        "name": "Tên sản phẩm",
+        "slug": "Đường dẫn",
+        "description": "Mô tả",
+        "image": "Hình ảnh",
+        "status": "Tình trạng",
+        "featured": "Nổi bật",
+        "category": "Danh mục",
+        "body": "Nội dung",
+        "min_price": "Giá min",
+        "max_price": "Giá max",
+        "variants": "Biến thể"
+      },
+      "variants-empty": "Chưa tạo biến thể",
+      "create": "Thêm sản phẩm",
+      "description-log": "Dùng ':' ngăn cách key và value, dùng '/' để xuống dòng",
+      "error": {
+        "name": "Tên không được để trống",
+        "description": "Mô tả không được để trống",
+        "category": "Danh mục không được để trống"
+      }
+    },
+    "product-variant": {
+      "field": {
+        "sku": "SKU",
+        "size": "Kích cỡ",
+        "color": "Màu sắc",
+        "image": "Hình ảnh",
+        "is_active": "Tình trạng",
+        "discount": "Giảm giá",
+        "price": "Giá",
+        "name": "Tên sản phẩm",
+        "quantity_in_stock": "Số lượng kho",
+        "quanity_reserved": "Số lượng đặt",
+        "quantity_selled": "Số lượng bán"
+      },
+      "size": {
+        "small": "Nhỏ",
+        "medium": "Trung bình",
+        "large": "Lớn"
+      },
+      "create": "Thêm biến thể",
+      "error": {
+        "color": "Màu sắc không được phép trống",
+        "size": "Kích cỡ không được phép trống",
+        "price": "Giá không được phép trống",
+        "quantity_in_stock": "Số lượng kho không được phép trống"
+      }
+    },
+    "gallery": {
+      "field": {
+        "title": "Tiêu đề",
+        "description": "Mô tả",
+        "image": "Hình ảnh",
+        "href": "Đường dẫn",
+        "type": "Loại"
+      },
+      "create": "Thêm hình ảnh",
+      "type": {
+        "slider": "Slider",
+        "banner": "Banner",
+        "design": "Thiết kế",
+        "social": "Mạng xã hội"
+      },
+      "error": {
+        "title": "Tiêu đề không được phép trống",
+        "type": "Loại không được phép trống",
+        "image": "Hình ảnh không được phép trống"
+      }
+    },
+    "feedback": {
+      "field": {
+        "name": "Tên",
+        "email": "Email",
+        "phone":"Số điện thoại",
+        "subject": "Tiêu đề",
+        "show": "Hiển thị",
+        "avatar": "Ảnh đại diện",
+        "role": "Chức vụ",
+        "type": "Loại",
+        "message": "Nội dung"
+      },
+      "create": "Thêm phản hồi",
+      "type": {
+        "feedback": "Phản hồi",
+        "contact": "Liên hệ",
+        "design":"Thiết kế",
+        "other": "Khác"
+      },
+      "error": {
+        "name":"Tên không được để trống",
+        "email": "Email không được phép trống",
+        "phone": "Số điện thoại không được phép trống",
+        "subject": "Tiêu đề không được phép trống",
+        "type": "Loại phản hồi không được phép trống",
+        "phoneInvalid": "Số điện thoại không hợp lệ",
+        "subjectTooShort": "Tiêu đề phải nhất 10 kí tự",
+        "emailInvalid": "Email không hợp lệ"
+      }
+    },
+    "color": {
+      "field": {
+        "name": "Màu",
+        "code": "Mã màu"
+      },
+      "create": "Thêm màu"
+    },
+    "menu": {
+      "field": {
+        "name": "Tên",
+        "position": "Vi trí",
+        "item": "Mô tả"
+      },
+      "create": "Thêm menu",
+      "error": {
+        "name": "Tên không được để trống",
+        "position": "Vi trí không được phép trống",
+        "item": "Mô tả không được phép trống"
+      }
+    },
+    "address": {
+      "field": {
+        "receiver_name": "Tên người nhận",
+        "phone": "Số điện thoại",
+        "address_line": "Địa chi",
+        "ward": "Phường",
+        "district": "Quận",
+        "city": "Thành phố",
+        "default": "Mặc định",
+        "customer":"Khách hàng"
+      },
+      "create": "Thêm địa chỉ",
+      "error": {
+        "receiver_name": "Tên người nhận không được phép trống",
+        "phone": "Số điện thoại không được phép trống",
+        "address_line": "Địa chi không được phép trống",
+        "customer": "Khách hàng không được phép trống"
+      }
     }
   },
   "setting": {
@@ -140,6 +539,85 @@
     },
     "theme": {
       "color": "Màu chủ đề"
+    },
+    "role": {
+      "field": {
+        "id": "ID",
+        "name": "Tên",
+        "description": "Mô tả",
+        "created_at": "Ngày tạo",
+        "updated_at": "Ngày cập nhật"
+      },
+      "menu": "Menu",
+      "function": "Chức năng",
+      "select": "Hãy chọn",
+      "create": "Thêm vai trò",
+      "error": {
+        "name": "Tên không được để trống"
+      }
+    },
+    "notification": {
+      "title": "Thông báo",
+      "title_detail": "Chi tiết thông báo",
+      "mark_all_as_read": "Đánh dấu tất cả đã đọc",
+      "view_all": "Xem tất cả",
+      "empty": "Không có thông báo mới",
+      "name": "Người gửi",
+      "message": "Nội dung",
+      "time": "Thời gian",
+      "type": "Loại",
+      "type_noti": {
+        "order": "Đơn hàng",
+        "contact": "Liên hệ"
+      }
+    },
+    "image": {
+      "field": {
+        "image": "Hình ảnh",
+        "title": "Tiêu đề",
+        "description": "Mô tả",
+        "type": "Loại"
+      },
+      "create": "Thêm hình ảnh",
+      "type": {
+        "logo": "Logo",
+        "favicon": "Favicon",
+        "no_image": "Ảnh mặc định"
+      },
+      "error": {
+        "type": "Loại không được phép trống",
+        "image": "Hình ảnh không được phép trống"
+      }
+    }
+  },
+  "user": {
+    "account": {
+      "general": "Chung",
+      "security": "Bảo mật",
+      "avatar": "Ảnh đại diện",
+      "fullname": "Họ và tên",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "gender": "Giới tính",
+      "date_of_birth": "Ngày sinh",
+      "address": "Địa chỉ",
+      "position": "Vị trí",
+      "about": "Giới thiệu",
+      "role": "Vai trò",
+      "status_active": "Trạng thái",
+      "delete": "Xóa người dùng",
+      "old_password": "Mật khẩu cũ",
+      "new_password": "Mật khẩu mới",
+      "confirm_password": "Xác nhận mật khẩu",
+      "error": {
+        "fullname": "Họ và tên không được phép trống",
+        "email": "Email không được phép trống",
+        "phone": "Số điện thoại không được phép trống",
+        "old_password": "Mật khẩu cũ không được phép trống",
+        "new_password": "Mật khẩu mới không được phép trống",
+        "confirm_password": "Xác nhận mật khẩu không được phép trống",
+        "password_not_match": "Mật khẩu xác nhận không khớp"
+      }
     }
   }
 }

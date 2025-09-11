@@ -11,7 +11,7 @@ interface PageSizeOptionProps {
 const PageSizeOption: React.FC<PageSizeOptionProps> = ({ pageSize, onChange }) => {
   return (
     <div className='flex items-center gap-1'>
-      <span>Show</span>
+      {/* <span>Show</span> */}
       <Select
         defaultValue={pageSize}
         style={{ width: 80, margin: '0 8px' }}
@@ -22,7 +22,6 @@ const PageSizeOption: React.FC<PageSizeOptionProps> = ({ pageSize, onChange }) =
         <Option value={30}>30</Option>
         <Option value={50}>50</Option>
       </Select>
-      <span>Entries</span>
     </div>
   );
 };

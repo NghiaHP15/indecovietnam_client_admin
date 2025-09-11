@@ -13,6 +13,14 @@ export function fCurrency(number: InputValue) {
   return result(format, '.00');
 }
 
+export function fCurrencyVN(number?: number | string | null) {
+  if (number === null || number === undefined || number === '') return '';
+
+  const format = numeral(number).format('0,0'); 
+
+  return `${format.replace(/,/g, '.')} ₫`;
+}
+
 export function fPercent(number: InputValue) {
   const format = number ? numeral(Number(number) / 100).format('0.0%') : '';
 

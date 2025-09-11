@@ -105,8 +105,8 @@ axiosInstance.interceptors.response.use(
   (res: AxiosResponse<Result>) => {
     removePendingRequest(res.config);
     if (!res.data) throw new Error(t('sys.api.apiRequestFailed'));
-    const { data, isSuccess } = res.data;
-    const hasSuccess = data && isSuccess && Reflect.has(res, 'status') && res.status === ResultEnum.SUCCESS;
+    const { data, success } = res.data;
+    const hasSuccess = data && success && Reflect.has(res, 'status') && res.status === ResultEnum.SUCCESS;
     if (hasSuccess) {
       return data;
     }

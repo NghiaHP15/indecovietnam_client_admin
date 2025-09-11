@@ -11,14 +11,12 @@ import { MultiTabsProvider } from './multi-tabs/multi-tabs-provider';
 
 import { ThemeLayout } from '#/enum';
 import SettingButton from '../_common/setting-button';
-import { Button } from 'antd';
-import { colorPrimarys } from '@/theme/antd/theme';
 
 type Props = {
   offsetTop?: boolean;
 };
 const Main = forwardRef<HTMLDivElement, Props>(({ offsetTop = false }, ref) => {
-  const { themeStretch, themeLayout, multiTab } = useSettings();
+  const { themeLayout, multiTab } = useSettings();
   const { colorBorder } = useThemeToken();
   const { screenMap } = useResponsive();
 
@@ -40,7 +38,7 @@ const Main = forwardRef<HTMLDivElement, Props>(({ offsetTop = false }, ref) => {
 
   return (
     <Content ref={ref} style={mainStyle} className="flex overflow-auto">
-      <div className={'m-4 h-full w-full relative'}>
+      <div className={'p-4 h-full w-full relative'}>
         {multiTab ? (
           <MultiTabsProvider>
             <MultiTabs offsetTop={offsetTop} />
@@ -48,7 +46,7 @@ const Main = forwardRef<HTMLDivElement, Props>(({ offsetTop = false }, ref) => {
         ) : (
           <Outlet />
         )}
-      <div className='absolute rounded-full p-2 shadow-md bottom-[5%] right-0' style={{backgroundColor: `${colorBorder}60`}}><SettingButton /></div>
+      <div className='absolute rounded-full p-2 shadow-md bottom-[5%] right-5 z-10' style={{backgroundColor: `${colorBorder}60`}}><SettingButton /></div>
       </div>
     </Content>
   );

@@ -1,5 +1,5 @@
 export interface Result<T = any> {
-  isSuccess: string;
+  success: string;
   message: number;
   data?: T;
 }

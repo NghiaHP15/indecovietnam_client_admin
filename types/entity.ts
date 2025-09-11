@@ -1,4 +1,3 @@
-import { Dayjs } from 'dayjs';
 import { BasicStatus, PermissionType } from './enum';
 
 export interface Mode {
@@ -19,103 +18,28 @@ export interface Userinfo {
 
 export interface UserInfo {
   id?: string;
-  userName?: string;
-  fullName?: string | null;
+  email?: string;
+  fullname?: string | null;
   password?: string;
+  phone?: string;
   isAdmin?: boolean;
   avatar?: string;
+  position?: string;
   role?: any;
-  state?: BasicStatus;
+  gender?: string;
+  about?: string;
+  address?: string;
   permissions?: any;
   group_user?: string;
   userGroupId?: string;
   confirmPassword?: string;
   menu?: string;
   menuFunc?: string;
-  activityState?: boolean;
+  status_active?: string;
   orgId?: string
-  birthDate?: string
+  date_of_birth?: string;
   vendorId?: string
   refRole?: string
-}
-
-export interface Drive {
-  id?: string;
-  name?: string;
-  idCard?: string;
-  phone?: string;
-  email?: string;
-  address?: string;
-  gender?: boolean;
-  birthDate?: string;
-  licenseType?: string;
-  licenseNumber?: string;
-  licensePlace?: string;
-  licenseDate?: string;
-  expiryDate?: string;
-  groupName?: string;
-  manager?: string;
-  managerPhone?: string;
-  licenseTypes?: string;
-  experience?: string;
-  status?: number;
-  orgId?: string;
-  orgName?: string;
-  usernameTelegram?: string;
-  userIdTelegram?: number;
-}
-
-export interface Product {
-  id?: string,
-  refId?: string,
-  name?: string,
-  nameNor?: string,
-  image?: string,
-  description?: string,
-  price?: string
-}
-
-export interface IntermediatePoints {
-  id?: string;
-  tripHistoryId?: string;
-  lat?: number,
-  lng?: number,
-  note?: string;
-  name?: string;
-  sort?: number;
-}
-export interface IntermediatePointsRequest extends IntermediatePoints {
-  rowId?: string;
-  editing?: boolean,
-  value?: any
-}
-
-export interface DataTransmissionUnit {
-  id: string; // Hoặc một kiểu dữ liệu khác phù hợp
-  code: string;
-  name: string;
-  phone: string; // Số điện thoại
-}
-
-export interface Province {
-  id: string;
-  code?: string;
-  name?: string;
-  phone?: string;
-}
-
-export interface IConfigConnect {
-  id: string;
-  name?: string;
-  value?: string;
-  status?: BasicStatus;
-  tax: string;
-  address: string;
-  email: string;
-  phone: string;
-  ip: string;
-  secret?: string,
-  clientId?: string
 }
 
 export interface IUserGroup {
@@ -131,6 +55,7 @@ export interface IUserGroup {
 export interface IRoleGroup {
   id: string;
   code: string,
+  description?: string;
   name?: string;
   parentId?: string;
   permission: any;
@@ -164,41 +89,6 @@ export interface INotification {
   activity?:boolean
 }
 
-export interface IResponse {
-  content?: any;
-  empty?: boolean;
-  first?: boolean;
-  last?: boolean;
-  number?: number;
-  numberOfElements?: number;
-  pageable?: {
-    pageNumber: number,
-    pageSize: number,
-    sort: { empty: boolean, sorted: boolean, unsorted: boolean },
-    offset: number,
-  };
-  page?: {
-    number?: number;
-    size: number;
-    totalElements?: number;
-    totalPages?: number;
-  }
-  size: number;
-  sort?: { empty: true, sorted: false, unsorted: true };
-  totalElements?: number;
-  totalPages?: number;
-}
-
-export interface User {
-  id: string,
-  userName: string,
-  fullName: string,
-  address: string,
-  refId: string,
-  refRole: string,
-  vendorId: string,
-}
-
 export interface Permission {
   id: string;
   parentId: string;
@@ -217,33 +107,6 @@ export interface Permission {
   children?: Permission[];
 }
 
-export interface Role {
-  id: string;
-  vendorId: string;
-  code: string;
-  name: string;
-  permission?: string | string[];
-}
-
-export interface Province {
-  id: string;
-  code?: string;
-  name?: string;
-}
-export interface Option {
-  id: any;
-  name: string;
-}
-
-export interface ViewConfig {
-  id?: string | null;
-  orgId?: string | null;
-  name?: string;
-  url?: string;
-  position?: string;
-  state?: number | null;
-  type?: number | null;
-}
 
 export interface ISetupColor {
   id?: string | null;
@@ -252,83 +115,252 @@ export interface ISetupColor {
   action?: boolean | null;
 }
 
-export interface Warehouse{
-  id?: string,
-  vendorId?: string
-  name:string
-  description:string
-  isMain: number | string | null
-}
-
-export interface Supplier{
-  id?: string;
-  vendorId?: string;
-  categoryId?: string;
-  name: string;
-  address: string;
-  taxCode: string;
-  bankAccount: string;
-  bankName: string;
-}
-
-export interface CategorySupplier{
-  id?: string;
-  vendorId?: string;
-  name: string;
-}
-
-export interface Vendor {
-  id: string,
-  name: string,
-  refId: string,
-  warehouseDomain?: string
-}
-
-export interface InventoryProduct {
-  productId: string,
-  actualQty: number,
-  stockQty: number,
-}
-
-export interface Inventory {
-  id?: string,
-  name: string,
-  warehouseId: string,
-  date: string,
-  items: InventoryProduct[],
-  status: number | string
-}
-
-
-export interface ReceiptItem {
-  id?: string;
-  productId?: string;
-  qty: number;
-  actualQty: number;
-  unitPrice: number;
-}
-
-
-export interface Receipt {
-  type: number;
-  name: string;
-  fromWarehouseId: string;
-  toWarehouseId: string | null;
-  date: string | Dayjs;
-  items: ReceiptItem[];
-}
-
-export interface Service {
-  id: string;
-  name: string;
-  description: string;
-  publicKey: string;
-  privateKey: string;
-}
 export interface CategoriesType {
   id?:string,
   name: string,
   description:string,
   updated_at: string,
   updated_by: string,
+}
+
+export interface IRole{
+  id?:string,
+  name: string,
+  description:string,
+  created_at: string,
+  updated_at: string,
+}
+
+export interface IColor {
+  id: string,
+  name: string,
+  code: string,
+}
+
+export interface IBlog {
+  id?: string,
+  title: string,
+  slug?: string,
+  image: string | null,
+  description: string,
+  latest_blog: boolean,
+  author: {
+    id: string,
+    fullname: string
+  },
+  category: {
+    id: string,
+    title: string,
+    slug: string
+  },
+  published_at: Date,
+  tag: string[],
+  body: string | null,
+}
+
+export interface IBlogCategory {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+}
+
+export interface IService {
+  id?: string,
+  title: string,
+  slug?: string,
+  image: string | null,
+  description: string,
+  category: {
+    id: string,
+    title: string,
+    slug: string
+  },
+  published_at: Date,
+  tag: string[],
+  body: string | null,
+}
+
+export interface IServiceCategory {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+}
+
+export interface IRoomCategory {
+  id?: string;
+  title: string;
+  slug: string;
+  description: string;
+  image: string;
+  featured: boolean;
+}
+
+export interface IProductCategory {
+  id?: string;
+  title: string;
+  description: string;
+  slug: string;
+  image: string;
+  featured: boolean;
+  roomCategory: {
+    id: string;
+    title: string;
+    slug: string;
+  }
+}
+
+export interface IProduct {
+  id?: string
+  name: string,
+  slug?: string,
+  description: string,
+  image: string,
+  status: string,
+  featured: boolean,
+  productCategory: {
+    id: string,
+    title: string,
+    slug: string
+  },
+  body: string,
+  min_price?: number,
+  max_price?: number,
+  variants?: IProductVariant[];
+}
+
+export interface IProductVariant {
+  id?: string;
+  sku?: string;
+  image?: string; 
+  color?: {
+    id: string;
+    name: string;
+    code: string;
+  };
+  size?: string;
+  price?: number;
+  discount?: number;
+  is_active?: boolean; 
+  quantity_in_stock?: number;
+  quantity_reserved?: number;
+  quantity_selled?: number;
+  product?: {
+    id: string;
+    name: string;
+  };
+}
+
+export interface IGallery {
+  id?: string;
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+  type: string;
+}
+
+export interface IFeedback {
+  id?: string;
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  show: boolean;
+  avatar: string;
+  type: string;
+  role: string;
+}
+
+export interface IMenu {
+  id?: string;
+  name: string;
+  item: string;
+  position: string;
+}
+
+export interface IAddress {
+  id?: string;
+  receiver_name: string;
+  address_line: string;
+  ward: string;
+  district: string;
+  city: string;
+  default?: boolean;
+  phone: string;
+  customer?: {
+    id: string;
+    firstname: string;
+    lastname: string;
+  }
+}
+
+export interface ICustomer {
+  id?: string;
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  phone?: string;
+  date_of_birth?: string | null;
+  gender?: string;
+  level?: string;
+  avatar?: string;
+  provider?: string;
+  password?: string;
+  addresses?: IAddress[];
+  orders?: IOrder[];
+}
+
+export interface IContact {
+  id?: string;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  subject?: string;
+  avatar?: string;
+  type?: string;
+}
+
+export interface IOrder {
+  id?: string;
+  txnRef?: string;
+  order_date: string;
+  status?: string;
+  payment_status?: string;
+  total_amount: number;
+  address: IAddress | null;
+  note?: string;
+  paymentmethod?: string;
+  customer: ICustomer | null;
+  products: IOrderItem[];
+}
+
+export interface IOrderItem {
+  id: string;
+  name: string;
+  slug: string;
+  total_price: number;
+  quantity: number;
+  product_variant: IProductVariant | null;
+}
+
+export interface IEmployee {
+  id?: string;
+  fullname: string;
+  password?: string;
+  email: string;
+  phone: string;
+  date_of_birth: string;
+  gender: string;
+  address: string;
+  status_active: boolean;
+  avatar: string;
+  position: string;
+  role: {
+    id: string;
+    name: string;
+  };
 }

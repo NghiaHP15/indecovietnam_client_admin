@@ -1,4 +1,4 @@
-import { Button, Dropdown, Space } from 'antd';
+import { Button, Dropdown } from 'antd';
 
 import useLocale, { LANGUAGE_MAP } from '@/locales/useLocale';
 
@@ -7,7 +7,6 @@ import { SvgIcon } from '../icon';
 import { LocalEnum } from '#/enum';
 import type { MenuProps } from 'antd';
 import { useThemeToken } from '@/theme/hooks';
-import Color from 'color';
 
 type Locale = keyof typeof LocalEnum;
 
@@ -20,7 +19,7 @@ interface PropKey {
 
 export default function LocalePicker({title}: PropKey) {
   const { setLocale } = useLocale();
-  const { colorBorder, colorTextBase } = useThemeToken();
+  const { colorTextBase } = useThemeToken();
 
   const localeList: MenuProps['items'] = Object.values(LANGUAGE_MAP).map((item) => {
     return {
@@ -38,12 +37,10 @@ export default function LocalePicker({title}: PropKey) {
         trigger={['click']}
         menu={{ items: localeList, onClick: (e) => setLocale(e.key as Locale) }}
       >
-        <Space>
-          <Button type="primary" className="!p-1.5" style={{ backgroundColor: Color(colorBorder).alpha(0.6).toString(), borderRadius: "15px"}}>
-            <SvgIcon icon="ic-would" size={20} />
-            {title && <span className='text-xs' style={{color: colorTextBase}}>{title}</span>}
-          </Button>
-        </Space>
+        <Button style={{ padding: '0 6px' }} >
+          <SvgIcon icon="ic-would" size={20} />
+          {title && <span className='text-xs' style={{color: colorTextBase}}>{title}</span>}
+        </Button>
       </Dropdown>
     </>
   );

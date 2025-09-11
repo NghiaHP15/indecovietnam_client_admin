@@ -1,4 +1,3 @@
-
 export enum MODE {
   CREATE = "CREATE",
   UPDATE = "UPDATE",
@@ -18,6 +17,26 @@ export const GENDER = {
   ],
   MALE: true,
   FEMALE: false,
+}
+
+export const GENDER_OPTIONS = {
+  list: [
+    {
+      value: "male",
+      label: 'common.male'
+    },
+    {
+      value: "female",
+      label: 'common.female'
+    },
+    {
+      value: "other",
+      label: 'common.other'
+    },
+  ],
+  MALE: "male", //Nam
+  FEMALE: "female", //Nữ
+  OTHER: "other",
 }
 
 export const ROLE_CODE = {
@@ -247,4 +266,274 @@ export const EXCEL_WAREHOUSE_LIST_CONFIG_FIELD  = {
 export const LOGIN_TYPE ={
   AUTO:"AUTO",
   LOGIN:"LOGIN"
+}
+
+export const STATUS_PRODUCT = {
+  list: [
+    {
+      label: "website.product.status-product.new",
+      value: "new",
+    },
+    {
+      label: "website.product.status-product.hot",
+      value: "hot",
+    },
+    {
+      label: "website.product.status-product.sale",
+      value: "sale",
+    },
+    {
+      label: "website.product.status-product.default",
+      value: "default",
+    },
+  ],
+  NEW:"new",
+  HOT:"hot",
+  SALE:"sale",
+  DEFAULT:"default",
+}
+
+export const SIZE_PRODUCT = {
+  list: [
+    {
+      label: "website.product-variant.size.small",
+      value: "small",
+    },
+    {
+      label: "website.product-variant.size.medium",
+      value: "medium",
+    },
+    {
+      label: "website.product-variant.size.large",
+      value: "large",
+    },
+  ],
+  SMALL:"small",
+  MEDIUM:"medium",
+  LARGE:"large",
+}
+
+export const TYPE_GALLERY = {
+  list: [
+    {
+      label: "website.gallery.type.slider",
+      value: "slider",
+    },
+    {
+      label: "website.gallery.type.banner",
+      value: "banner",
+    },
+    {
+      label: "website.gallery.type.design",
+      value: "design",
+    },
+    {
+      label: "website.gallery.type.social",
+      value: "social",
+    },
+  ],
+  SLIDER: "slider",
+  BANNER: "banner",
+  DESIGN: "design",
+  SOCIAL: "social",
+}
+
+export const TYPE_FFEDBACK = {
+  list: [
+    {
+      label: "website.feedback.type.feedback",
+      value: "feedback",
+    },
+    {
+      label: "website.feedback.type.contact",
+      value: "contact",
+    },
+    {
+      label: "website.feedback.type.design",
+      value: "design",
+    },
+    {
+      label: "website.feedback.type.other",
+      value: "other",
+    },
+  ],
+  FEEDBACK: "feedback",
+  CONTACT: "contact",
+  DESIGN: "design",
+  OTHER: "other",
+}
+
+export const LEVEL_CUSTOMER = {
+  list: [
+    {
+      label: "management.customer.level.silver",
+      value: "silver",
+    },
+    {
+      label: "management.customer.level.gold",
+      value: "gold",
+    },
+    {
+      label: "management.customer.level.vip",
+      value: "vip",
+    },
+  ],
+  SLIVER: "silver",
+  GOLD: "gold",
+  VIP: "vip",
+}
+
+export const PROVIDER_CUSTOMER = {
+  list: [
+    {
+      label: "management.customer.provider.google",
+      value: "google",
+    },
+    {
+      label: "management.customer.provider.facebook",
+      value: "facebook",
+    },
+    {
+      label: "management.customer.provider.local",
+      value: "local",
+    }
+  ],
+  GOOGLE: "google",
+  FACEBOOK: "facebook",
+  LOCAL: "local",
+}
+
+export const PAYMENT_STATUS = {
+  list: [
+    {
+      label: "management.order.payment_status.pending",
+      value: "pending",
+      style: "#FFE100",
+    },
+    {
+      label: "management.order.payment_status.paid",
+      value: "paid",
+      style: "#08CB00",
+    },
+    {
+      label: "management.order.payment_status.awaiting_confirmation",
+      value: "awaiting_confirmation",
+      style: "#33A1E0",
+    },
+    {
+      label: "management.order.payment_status.cancelled",
+      value: "cancel",
+      style: "#E43636",
+    },
+    {
+      label: "management.order.payment_status.failed",
+      value: "failed",
+      style: "#E43636",
+    },
+  ],
+  PENDING: "pending",
+  PAID: "paid",
+  AWAITINGCOFIRMATION: "awaiting_confirmation",
+  CANCELLED: "cancel",
+  FAILED: "failed",
+}
+
+export const ORDER_STATUS = {
+  list: [
+    {
+      label: "management.order.order_status.pending",
+      value: "pending",
+      style: "#FFE100",
+    },
+    {
+      label: "management.order.order_status.processing",
+      value: "processing",
+      style: "#33A1E0",
+    },
+    {
+      label: "management.order.order_status.shipped",
+      value: "shipped",
+      style: "#FEA405",
+    },
+    {
+      label: "management.order.order_status.delivered",
+      value: "delivered",
+      style: "#08CB00",
+    },
+    {
+      label: "management.order.order_status.cancelled",
+      value: "cancelled",
+      style: "#E43636",
+    },
+  ],
+  PENDING: "pending",
+  PROCESSING: "processing",
+  SHIPPED: "shipped",
+  DELIVERED: "delivered",
+  CANCELLED: "cancelled",
+}
+
+export const POSITION_EMPLOYEEE = {
+  list: [
+    {
+      label: "management.employee.position.ceo",
+      value: "ceo",
+    },
+    {
+      label: "management.employee.position.manager",
+      value: "manager",
+    },
+    {
+      label: "management.employee.position.cskh",
+      value: "cskh",
+    },
+    {
+      label: "management.employee.position.staff",
+      value: "staff",
+    },
+    {
+      label: "management.employee.position.other",
+      value: "other",
+    },
+  ],
+  CEO: "ceo",
+  MANAGER: "manager",
+  CSKH: "cskh",
+  STAFF: "staff",
+  OTHER: "other",
+}
+
+export const STATUS_EMPLOYEE = {
+  list: [
+    {
+      label: "management.employee.status_active.active",
+      value: "active",
+    },
+    {
+      label: "management.employee.status_active.inactive",
+      value: "inactive",
+    },
+  ],
+  ACTIVE: "active",
+  INACTIVE: "inactive",
+}
+
+export const NOTI_TYPE = {
+  ORDER: "order",
+  CONTACT: "contact",
+}
+
+export const SORT_IMAGE = {
+  list: [
+    {
+      label: "common.newest",
+      value: "desc",
+    },
+    {
+      label: "common.oldest",
+      value: "asc",
+    }
+  ],
+  CREATE_AT_ASC: "asc",
+  CREATE_AT_DESC: "desc",
 }

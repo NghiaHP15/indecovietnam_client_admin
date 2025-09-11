@@ -1,13 +1,23 @@
-import { faker } from '@faker-js/faker';
 import { Typography } from 'antd';
 import Color from 'color';
 
 import Card from '@/components/card';
 import { Iconify } from '@/components/icon';
 import { useThemeToken } from '@/theme/hooks';
+import { no_avatar } from '@/assets/images';
+import { useEffect, useState } from 'react';
+import { fCurrencyVN } from '@/utils/format-number';
+import { useTranslation } from 'react-i18next';
 
-export default function TopAuthor() {
+export default function TopAuthor({ data }: { data: any | [] }) {
+  const [customers, setCustomers] = useState([]);
   const themeToken = useThemeToken();
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    setCustomers(data || []);
+  }, [data]);
+  
   const getTrophyIconColor = (index: number) => {
     switch (index) {
       case 1:
@@ -30,21 +40,18 @@ export default function TopAuthor() {
   };
   return (
     <Card className="flex-col">
-      <header className="self-start">
-        <Typography.Title level={5}>Top Authors</Typography.Title>
+      <header className="self-start mb-1">
+        <Typography.Title level={5}>{t('dashboard.top_customers')}</Typography.Title>
       </header>
       <main className="w-full">
-        {new Array(3).fill('').map((_, index) => (
-          <div key={index} className="mb-4 flex">
-            <img src={faker.image.avatarGitHub()} alt="" className="h-10 w-10 rounded-full" />
-            <div className="ml-2 flex flex-col">
-              <span>{faker.person.fullName()}</span>
-              <div className="flex items-center  text-gray">
-                <Iconify icon="icon-park-solid:like" size={14} />
-                <span className="ml-2">
-                  {faker.number.float({ min: 3, max: 9, multipleOf: 3 })}k
-                </span>
-              </div>
+        {customers?.map((item: any, index: number) => (
+          <div key={index} className="mb-2 flex">
+            <img src={item.avatar || no_avatar} alt="avatar" className="h-10 w-10 rounded-full" />
+            <div className="ml-2 flex flex-col font-roboto">
+              <span>{item.firstname + ' ' + item.lastname}</span>
+              <span className='font-medium'>
+                {fCurrencyVN(item.totalSpent || 0)}
+              </span>
             </div>
 
             <div

@@ -16,7 +16,7 @@ import { ThemeLayout, ThemeMode } from '#/enum';
 
 function DashboardLayout() {
   const { themeLayout, themeMode } = useSettings();
-  const { colorBgBase, colorTextBase, colorBgLayout } = useThemeToken();
+  const { colorTextBase, colorBgLayout } = useThemeToken();
 
   const mainEl = useRef(null);
   const { scrollY } = useScroll({ container: mainEl });

@@ -9,10 +9,6 @@ import { PermissionType } from '#/enum';
 // import { useLoginStateContext } from '@/pages/sys/login/providers/LoginStateProvider';
 import { filter } from 'lodash';
 import { useLoginStateContext } from '@/pages/sys/login/providers/LoginStateProvider';
-import { Role } from '#/entity';
-import {SUPPER_AD} from '@/store/permission.json'
-import axios from 'axios';
-
 
 type Props = {
   children: React.ReactNode;
@@ -35,34 +31,20 @@ export default function AuthGuard({ children }: Props) {
   const getMenu = async () => {
     try {
       if (token && userInfo) {
-        const _data: any = await axios.get(
-          import.meta.env.VITE_APP_BASE_API + `internal/role`,
-          { headers: { Authorization: `Bearer ${token}` } },
-        );
-        const data = _data?.data?.data
-        if(userInfo.refRole == "SUPER_ADMIN"){
-          userInfo.role = JSON.stringify(SUPPER_AD);
-        }else{
-          if (data.length > 0) {
-            const _role = data.find((item: Role) => {
-              if (item.code == userInfo.refRole) {
-                return item;
-              }
-            });
-            userInfo.role = _role.permission;
-          } else {
-            userInfo.role = '';
-          }
-        }
+        console.log(userInfo);
 
         if (userInfo) {
           const u = userInfo;
           let role = [];
+          console.log(u);
+          
           if (userInfo.role === '') {
             role = [];
           } else {
-            role = JSON.parse(userInfo.role as string);
+            // role = JSON.parse(userInfo.role as string);
+            role = userInfo.role;
           }
+          
 
           const menu: any = {};
           role.forEach((item: any) => {

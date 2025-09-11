@@ -1,5 +1,5 @@
 import { useThemeToken } from "@/theme/hooks";
-import { AppstoreFilled, ChromeFilled, HomeFilled, MoonFilled, SettingFilled } from "@ant-design/icons";
+import { ChromeFilled, HomeFilled, MoonFilled, SettingFilled } from "@ant-design/icons";
 import { Tabs } from "antd";
 import { TabsProps } from "antd/lib";
 import { useTranslation } from "react-i18next";
@@ -7,7 +7,6 @@ import { useState } from "react";
 import General from "./general";
 import System from "./system";
 import Email from "./email";
-// import Pos from "./pos";
 import Theme from "./theme";
 
 function AppSetting() {
@@ -41,19 +40,13 @@ function AppSetting() {
     },
     {
       key: '4',
-      label: t("setting.install_application.pos"),
-      icon: <AppstoreFilled style={styleTab} />,
-      // children: <Pos/>
-    },
-    {
-      key: '5',
       label: t("setting.install_application.theme"),
       icon: <MoonFilled style={styleTab} />,
       children: <Theme/>
     },
   ]
 
-  const renderTabBar = (props: any, DefaultTabBar: any) => {
+  const renderTabBar = () => {
     return (
       <div className="w-full p-4 mb-6 border border-solid rounded-lg" style={{background: colorPrimaryBg, borderColor: colorBorder}}>
         <div className="flex items-center gap-2">
