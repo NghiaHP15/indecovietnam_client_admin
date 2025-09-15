@@ -601,7 +601,7 @@ export const ProductDetailForm = forwardRef(
                     formData.append('image', file as Blob);
                     if(param.image) {
                       const id = publicId(param.image);
-                      await deleteImage(id);
+                      id && await deleteImage(id);
                     }
                     const res = await uploadImage(formData);
                     if(res){

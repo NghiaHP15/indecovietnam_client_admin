@@ -86,7 +86,7 @@ export default function GeneralTab() {
                 formData.append('image', file as Blob);
                 if(data.image){
                   const id = publicId(data.image);
-                  await deleteImage(id);
+                  id && await deleteImage(id);
                 }
                 const res = await uploadImage(formData);
                 if(res){

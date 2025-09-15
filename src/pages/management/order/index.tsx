@@ -98,14 +98,14 @@ const Gallery = () => {
             return ({
               key: item.value,
               label: (
-                <div style={{background: item.style}} className={"flex items-center justify-center px-3 py-1 rounded-md w-full font-roboto "}>{t(item.label)}</div>
+                <div style={{background: item.style.bg, color: item.style.color}} className={"flex items-center justify-center px-3 py-1 rounded-md w-full font-roboto "}>{t(item.label)}</div>
               ),
               onClick: () => onSelect(item.value, 'status', record)
             })
           })
           return (
             <Dropdown trigger={['click']} menu={{ items }}>
-              <button style={{background: result?.style}} className={`flex items-center justify-center px-3 py-1 rounded-md font-roboto`}>{t(`${result?.label}`)}</button>
+              <button style={{background: result?.style.bg, color: result?.style.color}} className={`flex items-center justify-center px-3 py-1 rounded-md font-roboto`}>{t(`${result?.label}`)}</button>
             </Dropdown>
           )
         }
@@ -121,14 +121,14 @@ const Gallery = () => {
             return ({
               key: item.value,
               label: (
-                <div style={{background: item.style}} className={"flex items-center justify-center px-3 py-1 rounded-md w-full font-roboto"}>{t(item.label)}</div>
+                <div style={{background: item.style.bg, color: item.style.color}} className={"flex items-center justify-center px-3 py-1 rounded-md w-full font-roboto"}>{t(item.label)}</div>
               ),
               onClick: () => onSelect(item.value, 'payment_status',  record)
             })
           })
           return (
             <Dropdown trigger={['click']} menu={{ items }}>
-              <button style={{background: result?.style}} className={`flex items-center justify-center px-3 py-1 rounded-md font-roboto`}>{t(`${result?.label}`)}</button>
+              <button style={{color: result?.style.color, background: result?.style.bg}} className={`flex items-center justify-center px-3 py-1 rounded-md font-roboto`}>{t(`${result?.label}`)}</button>
             </Dropdown>
           )
         }

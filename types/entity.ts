@@ -364,3 +364,10 @@ export interface IEmployee {
     name: string;
   };
 }
+
+export interface IPolicy {
+  id?: string;
+  title: string;
+  slug: string;
+  description: string;
+}

@@ -450,7 +450,7 @@ export const FeedbackDetailForm = forwardRef(
                     formData.append('image', file as Blob);
                     if(param.avatar) {
                       const id = publicId(param.avatar);
-                      await deleteImage(id);
+                      id && await deleteImage(id);
                     }
                     const res = await uploadImage(formData);
                     if(res){

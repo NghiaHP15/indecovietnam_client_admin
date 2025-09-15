@@ -408,27 +408,42 @@ export const PAYMENT_STATUS = {
     {
       label: "management.order.payment_status.pending",
       value: "pending",
-      style: "#FFE100",
+      style: {
+        color: "#baa400",
+        bg: "#ffe10030",
+      },
     },
     {
       label: "management.order.payment_status.paid",
       value: "paid",
-      style: "#08CB00",
+      style: {
+        color: "#079201",
+        bg: "#08cb0029",
+      },
     },
     {
       label: "management.order.payment_status.awaiting_confirmation",
       value: "awaiting_confirmation",
-      style: "#33A1E0",
+      style: {
+        color: "#008ddd",
+        bg: "#00a1ff2b",
+      },
     },
     {
       label: "management.order.payment_status.cancelled",
       value: "cancel",
-      style: "#E43636",
+      style: {
+        color: "#E43636",
+        bg: "#e4363624",
+      },
     },
     {
       label: "management.order.payment_status.failed",
       value: "failed",
-      style: "#E43636",
+      style: {
+        color: "#E43636",
+        bg: "#e4363624",
+      },
     },
   ],
   PENDING: "pending",
@@ -443,27 +458,42 @@ export const ORDER_STATUS = {
     {
       label: "management.order.order_status.pending",
       value: "pending",
-      style: "#FFE100",
+      style: {
+        color: "#baa400",
+        bg: "#ffe10030",
+      },
     },
     {
       label: "management.order.order_status.processing",
       value: "processing",
-      style: "#33A1E0",
+      style: {
+        color: "#008ddd",
+        bg: "#00a1ff2b",
+      },
     },
     {
       label: "management.order.order_status.shipped",
       value: "shipped",
-      style: "#FEA405",
+      style: {
+        color: "#eb05fe",
+        bg: "#bd00ff26",
+      },
     },
     {
       label: "management.order.order_status.delivered",
       value: "delivered",
-      style: "#08CB00",
+      style: {
+        color: "#079201",
+        bg: "#08cb0029",
+      },
     },
     {
       label: "management.order.order_status.cancelled",
       value: "cancelled",
-      style: "#E43636",
+      style: {
+        color: "#E43636",
+        bg: "#e4363624",
+      },
     },
   ],
   PENDING: "pending",

@@ -8,18 +8,15 @@ import {
   Modal,
   notification,
   Row,
-  Select,
   Space,
 } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { MODE, TYPE_GALLERY } from '#/enum';
-import { IGallery } from '#/entity';
+import { MODE } from '#/enum';
+import { IPolicy } from '#/entity';
 import { useThemeToken } from '@/theme/hooks';
 import { ArrowsAltOutlined } from '@ant-design/icons';
-import { UploadImage } from '@/components/upload/upload-image';
-import { deleteImage, uploadImage } from '@/api/services/uploadService';
-import { publicId } from '@/utils/publickey';
-import { createGallery, updateGallery } from '@/api/services/galleryService';
+import { createPolicy, updatePolicy } from '@/api/services/policyService';
+import Editor from '@/components/editor';
 
 type Props = {
   reload: () => void;
@@ -27,7 +24,7 @@ type Props = {
   isLink?: boolean;
 };
 
-const GalleryDetail = forwardRef(({ reload, readOnly, isLink }: Props, ref) => {
+const PolicyDetail = forwardRef(({ reload, readOnly, isLink }: Props, ref) => {
   const { t } = useTranslation();
 
   const refDetail = useRef<any>();
@@ -40,20 +37,20 @@ const GalleryDetail = forwardRef(({ reload, readOnly, isLink }: Props, ref) => {
 
   const { colorBgContainer } = useThemeToken();
 
-  const refMode = useRef<{ data?: IGallery; mode: string }>({
+  const refMode = useRef<{ data?: IPolicy; mode: string }>({
     data: undefined,
     mode: MODE.CREATE,
   });
 
   useImperativeHandle(ref, () => ({
-    create: (_data: IGallery) => {
+    create: (_data: IPolicy) => {
       refMode.current = {
         data: _data,
         mode: MODE.CREATE,
       };
       setIsOpen(true);
     },
-    update: (_data: IGallery) => {
+    update: (_data: IPolicy) => {
       refMode.current = {
         data: _data,
         mode: MODE.UPDATE,
@@ -129,7 +126,7 @@ const GalleryDetail = forwardRef(({ reload, readOnly, isLink }: Props, ref) => {
           </Space>
         ]}
       >
-        <GalleryDetailForm
+        <PolicyDetailForm
           ref={refDetail}
           setLoading={setLoading}
           reload={reload}
@@ -142,7 +139,7 @@ const GalleryDetail = forwardRef(({ reload, readOnly, isLink }: Props, ref) => {
   );
 });
 
-export default GalleryDetail;
+export default PolicyDetail;
 
 type FormProps = {
   reload: () => void;
@@ -152,11 +149,9 @@ type FormProps = {
   isLink?: boolean;
 };
 
-const emptyParameter: IGallery = {
+const emptyParameter: IPolicy = {
   title: '',
-  image: '',
-  href: '',
-  type: '',
+  slug: '',
   description: '',
 };
 
@@ -166,35 +161,35 @@ type ErrorOption = {
 
 const emptyValidate: ErrorOption = {
   title: null,
-  image: null,
-  type: null,
 };
 
-type PropKey = keyof IGallery;
+type PropKey = keyof IPolicy;
 
-export const GalleryDetailForm = forwardRef(
+export const PolicyDetailForm = forwardRef(
   ({ readOnly, setLoading, reload, closeModal }: FormProps, ref) => {
     const { t } = useTranslation();
   
     const [mode, setMode] = useState<string>(MODE.CREATE);
 
-    const [param, setParam] = useState<IGallery>(emptyParameter);
+    const [param, setParam] = useState<IPolicy>(emptyParameter);
 
     const [errors, setErrors] = useState<ErrorOption>(emptyValidate);
 
-    const [loadImge, setLoadImage] = useState<boolean>(false);
+    const [content, setContent] = useState<string | null>(null);
 
-    const update = async (data: IGallery) => {
-      let _data: IGallery = _.cloneDeep(data);
+    const update = async (data: IPolicy) => {
+      let _data: IPolicy = _.cloneDeep(data);
       setParam(_data);
+      setContent(_data.description);
       setMode(MODE.UPDATE);
     };
 
-    const create = async (_init: IGallery) => {
-      let _param: IGallery = _.cloneDeep({
+    const create = async (_init: IPolicy) => {
+      let _param: IPolicy = _.cloneDeep({
         ...emptyParameter,
       });
       setParam(_param);
+      setContent(_param.description);
       setMode(MODE.CREATE);
     };
 
@@ -221,19 +216,7 @@ export const GalleryDetailForm = forwardRef(
           case 'title':
             _errors[prop] = null;
             if (!_setParam[prop]) {
-              _errors[prop] = t('website.gallery.error.title');
-            }
-            break;
-          case 'type':
-            _errors[prop] = null;
-            if (!_setParam[prop]) {
-              _errors[prop] = t('website.gallery.error.type');
-            }
-            break;
-          case 'image':
-            _errors[prop] = null;
-            if (!_setParam[prop]) {
-              _errors[prop] = t('website.gallery.error.image');
+              _errors[prop] = t('website.policy.error.title');
             }
             break;
           default:
@@ -254,12 +237,13 @@ export const GalleryDetailForm = forwardRef(
 
     const submitProject = async () => {
       let _payload: any = _.cloneDeep(param);
+      _payload.description = content;
       const isValid = await performValidate([], _payload);
       if(!isValid) return;
       setLoading(true);
       try {
         if (mode === MODE.CREATE) {
-          const res = await createGallery(_payload);
+          const res = await createPolicy(_payload);
           if (res) {
             console.log(res);
             notification.success({ message: t("common.success"), duration: 3 });
@@ -268,7 +252,7 @@ export const GalleryDetailForm = forwardRef(
             resetData();
           }
         } else {
-          const res = await updateGallery(_payload.id, _payload);
+          const res = await updatePolicy(_payload.id, _payload);
           if (res) {
             notification.success({ message: t("common.success"), duration: 3 });
             reload();
@@ -288,10 +272,15 @@ export const GalleryDetailForm = forwardRef(
     };
 
     const onChange = (value: string | boolean | null, field: PropKey) => {
-      const _param: IGallery = _.cloneDeep(param);
+      const _param: IPolicy = _.cloneDeep(param);
       (_param as any)[field] = value;
       setParam(_param);
       performValidate([field as PropKey], _param);
+    }
+
+    const onEditorChange = (value: string) => {
+      if(readOnly) return;
+      setContent(value);
     }
 
     return (
@@ -299,93 +288,29 @@ export const GalleryDetailForm = forwardRef(
         <Row gutter={24}>
           <Col span={24}>
             <Form.Item
-              label={t('website.gallery.field.title')}
+              label={t('website.policy.field.title')}
               required
               validateStatus={errors['title'] ? 'error' : ''}
               help={errors['title']}
             >
               <Input
                 value={param.title}
-                placeholder={t('website.gallery.field.title')}
+                placeholder={t('website.policy.field.title')}
                 onChange={(e) => onChange(e.target.value, "title")}
                 disabled={readOnly || mode == MODE.VIEW}
               />
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Form.Item
-              label={t('website.gallery.field.href')}
-            >
-              <Input
-                value={param.href}
-                placeholder={t('website.gallery.field.href')}
-                onChange={(e) => onChange(e.target.value, "href")}
-                disabled={readOnly || mode == MODE.VIEW}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              label={t('website.gallery.field.type')}
-              required
-              validateStatus={errors['type'] ? 'error' : ''}
-              help={errors['type']}
-            >
-              <Select
-                value={param.type}
-                options={TYPE_GALLERY.list.map(item => ({label: t(item.label), value: item.value}))}
-                placeholder={t('website.gallery.field.type')}
-                fieldNames={{ label: 'label', value: 'value' }}
-                onChange={(e) => onChange(e, "type")}
-                disabled={readOnly || mode == MODE.VIEW}
-              />
-            </Form.Item>
-          </Col>
           <Col span={24}>
-            <Form.Item
-              label={t('website.gallery.field.description')}
-            >
-              <Input
-                value={param.description}
-                placeholder={t('website.gallery.field.description')}
-                onChange={(e) => onChange(e.target.value, "description")}
-                disabled={readOnly || mode == MODE.VIEW}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={24}>
-            <Form.Item
-              label={t('website.gallery.field.image')}
-              validateStatus={errors['image'] ? 'error' : ''}
-              help={errors['image']}
-            >
-              <UploadImage
-                width='100%'
-                loading={loadImge}
-                defaultImage={param.image || ""}
-                customRequest={async ({ file, onSuccess, onError}) => {
-                  try{
-                    setLoadImage(true);
-                    const formData = new FormData();
-                    formData.append('image', file as Blob);
-                    if(param.image) {
-                      const id = publicId(param.image);
-                      id && await deleteImage(id);
-                    }
-                    const res = await uploadImage(formData);
-                    if(res){
-                      onChange(res.url, "image");
-                      onSuccess?.(res, file as any);
-                    }
-                  } catch (error) {
-                   onError?.(error as any); 
-                  } finally {
-                    setLoadImage(false);
-                  }
-                }} 
-              />
-            </Form.Item>
-          </Col>
+              <Form.Item
+                label={t('website.policy.field.description')}
+              >
+                <Editor
+                  sample={false} value={content || ""} 
+                  onChange={(e) => onEditorChange(e)}
+                />
+              </Form.Item>
+            </Col>
         </Row>
       </Form>
     );

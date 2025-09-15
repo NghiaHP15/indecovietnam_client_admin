@@ -254,9 +254,6 @@ export const BlogDetailForm = forwardRef(
       reset: resetData,
     }));
 
-    console.log(param);
-    
-
     const performValidate = async (props: PropKey[], _currentParam: any) => {
       let _errors: ErrorOption = _.cloneDeep(errors);
       let _setParam = _currentParam ? _currentParam : param;
@@ -501,7 +498,7 @@ export const BlogDetailForm = forwardRef(
                     formData.append('image', file as Blob);
                     if(param.image) {
                       const id = publicId(param.image);
-                      await deleteImage(id);
+                      id && await deleteImage(id);
                     }
                     const res = await uploadImage(formData);
                     if(res){

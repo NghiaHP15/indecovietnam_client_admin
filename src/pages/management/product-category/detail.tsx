@@ -4,7 +4,6 @@ import {
   Button,
   Col,
   Form,
-  Image,
   Input,
   Modal,
   notification,
@@ -14,17 +13,15 @@ import {
   Switch,
 } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { MODE, SIZE_PRODUCT } from '#/enum';
+import { MODE } from '#/enum';
+import { IProductCategory } from '#/entity';
 import { useThemeToken } from '@/theme/hooks';
-import { ArrowsAltOutlined, } from '@ant-design/icons';
+import { ArrowsAltOutlined } from '@ant-design/icons';
 import { UploadImage } from '@/components/upload/upload-image';
 import { deleteImage, uploadImage } from '@/api/services/uploadService';
 import { publicId } from '@/utils/publickey';
-import { IColor, IProduct, IProductVariant } from '#/entity';
-import { createProductVariant, updateProductVariant } from '@/api/services/productVariantService';
-import { internalColors } from '@/api/services/colorService';
-import { internalProducts } from '@/api/services/productService';
-import { useDebounce } from '@/router/hooks';
+import { createProductCategory, updateProductCategory } from '@/api/services/productCategoryService';
+import { internalRoomCategorys } from '@/api/services/roomCategoryService';
 
 type Props = {
   reload: () => void;
@@ -32,7 +29,7 @@ type Props = {
   isLink?: boolean;
 };
 
-const ProductVariantDetail = forwardRef(({ reload, readOnly, isLink }: Props, ref) => {
+const ProductCategoryDetail = forwardRef(({ reload, readOnly, isLink }: Props, ref) => {
   const { t } = useTranslation();
 
   const refDetail = useRef<any>();
@@ -45,20 +42,20 @@ const ProductVariantDetail = forwardRef(({ reload, readOnly, isLink }: Props, re
 
   const { colorBgContainer } = useThemeToken();
 
-  const refMode = useRef<{ data?: IProductVariant; mode: string }>({
+  const refMode = useRef<{ data?: IProductCategory; mode: string }>({
     data: undefined,
     mode: MODE.CREATE,
   });
 
   useImperativeHandle(ref, () => ({
-    create: (_data: IProductVariant) => {
+    create: (_data: IProductCategory) => {
       refMode.current = {
         data: _data,
         mode: MODE.CREATE,
       };
       setIsOpen(true);
     },
-    update: (_data: IProductVariant) => {
+    update: (_data: IProductCategory) => {
       refMode.current = {
         data: _data,
         mode: MODE.UPDATE,
@@ -134,7 +131,7 @@ const ProductVariantDetail = forwardRef(({ reload, readOnly, isLink }: Props, re
           </Space>
         ]}
       >
-        <ProductVariantDetailForm
+        <ProductCategoryDetailForm
           ref={refDetail}
           setLoading={setLoading}
           reload={reload}
@@ -147,7 +144,7 @@ const ProductVariantDetail = forwardRef(({ reload, readOnly, isLink }: Props, re
   );
 });
 
-export default ProductVariantDetail;
+export default ProductCategoryDetail;
 
 type FormProps = {
   reload: () => void;
@@ -157,21 +154,17 @@ type FormProps = {
   isLink?: boolean;
 };
 
-const emptyParameter: IProductVariant = {
+const emptyParameter: IProductCategory = {
+  title: '',
+  slug: '',
+  description: '',
+  roomCategory: {
+    id: '',
+    title: '',
+    slug: '',
+  },
   image: '',
-  color: {
-    id: '',
-    name: '',
-    code: '',
-  },
-  size: '',
-  price: 0,
-  discount: 0,
-  product: {
-    id: '',
-    name: '',
-  },
-  is_active: false,
+  featured: false,
 };
 
 type ErrorOption = {
@@ -179,44 +172,49 @@ type ErrorOption = {
 };
 
 const emptyValidate: ErrorOption = {
-  color: null,
-  size: null,
-  price: null,
-  quantity_in_stock: null,
+  title: null,
+  roomCategory: null,
 };
 
-type PropKey = keyof IProductVariant;
+type PropKey = keyof IProductCategory;
 
-export const ProductVariantDetailForm = forwardRef(
-  ({ setLoading, reload, closeModal }: FormProps, ref) => {
+export const ProductCategoryDetailForm = forwardRef(
+  ({ readOnly, setLoading, reload, closeModal }: FormProps, ref) => {
     const { t } = useTranslation();
   
     const [mode, setMode] = useState<string>(MODE.CREATE);
 
-    const [param, setParam] = useState<IProductVariant>(emptyParameter);
+    const [param, setParam] = useState<IProductCategory>(emptyParameter);
 
     const [errors, setErrors] = useState<ErrorOption>(emptyValidate);
 
     const [loadImge, setLoadImage] = useState<boolean>(false);
 
-    const [product, setProduct] = useState<IProduct[]>([]);
+    const [category, setCategory] = useState<any>([]);
 
-    const [color, setColor] = useState<IColor[]>([]);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const [categoryData] = await Promise.all([
+            internalRoomCategorys({ limit: 1000 }),
+          ])
+          setCategory(categoryData);
+        } catch (error) {
+          console.log(error);
+        }
+      }
 
-    const [searchProduct, setSearchProduct] = useState<string>('');
+      fetchData();
+    }, []);
 
-    const [loadingProduct, setLoadingProduct] = useState<boolean>(false);
-
-    const debouncedValue = useDebounce(searchProduct, 500);
-
-    const update = async (data: IProductVariant) => {
-      let _data: IProductVariant = _.cloneDeep(data);
+    const update = async (data: IProductCategory) => {
+      let _data: IProductCategory = _.cloneDeep(data);
       setParam(_data);
       setMode(MODE.UPDATE);
     };
 
-    const create = async (_init: IProductVariant) => {
-      let _param: IProductVariant = _.cloneDeep({
+    const create = async (_init: IProductCategory) => {
+      let _param: IProductCategory = _.cloneDeep({
         ...emptyParameter,
       });
       setParam(_param);
@@ -233,25 +231,6 @@ export const ProductVariantDetailForm = forwardRef(
       reset: resetData,
     }));
 
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          setLoadingProduct(true);
-          const [colorData, productData] = await Promise.all([
-            internalColors({ limit: 1000 }),
-            internalProducts({ limit: 1000, search: debouncedValue }),
-          ]);
-          setColor(colorData);
-          setProduct(productData);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoadingProduct(false);
-        }
-      }
-      fetchData();
-    }, [debouncedValue]);
-    
     const performValidate = async (props: PropKey[], _currentParam: any) => {
       let _errors: ErrorOption = _.cloneDeep(errors);
       let _setParam = _currentParam ? _currentParam : param;
@@ -262,28 +241,16 @@ export const ProductVariantDetailForm = forwardRef(
       }
       props.forEach((prop) => {
         switch (prop) {
-          case 'color':
+          case 'title':
+            _errors[prop] = null;
+            if (!_setParam[prop]) {
+              _errors[prop] = t('website.product-category.error.title');
+            }
+            break;
+          case 'roomCategory':
             _errors[prop] = null;
             if (!_setParam[prop].id) {
-              _errors[prop] = t('website.product-variant.error.color');
-            }
-            break;
-          case 'size':
-            _errors[prop] = null;
-            if (!_setParam[prop]) {
-              _errors[prop] = t('website.product-variant.error.size');
-            }
-            break;
-          case 'quantity_in_stock':
-            _errors[prop] = null;
-            if (!_setParam[prop]) {
-              _errors[prop] = t('website.product-variant.error.quantity_in_stock');
-            }
-            break;
-          case 'price':
-            _errors[prop] = null;
-            if (!_setParam[prop]) {
-              _errors[prop] = t('website.product-variant.error.price');
+              _errors[prop] = t('website.product-category.error.room-category');
             }
             break;
           default:
@@ -309,15 +276,16 @@ export const ProductVariantDetailForm = forwardRef(
       setLoading(true);
       try {
         if (mode === MODE.CREATE) {
-          const res = await createProductVariant(_payload);
+          const res = await createProductCategory(_payload);
           if (res) {
+            console.log(res);
             notification.success({ message: t("common.success"), duration: 3 });
             reload();
             closeModal();
             resetData();
           }
         } else {
-          const res = await updateProductVariant(_payload.id, _payload);
+          const res = await updateProductCategory(_payload.id, _payload);
           if (res) {
             notification.success({ message: t("common.success"), duration: 3 });
             reload();
@@ -337,139 +305,71 @@ export const ProductVariantDetailForm = forwardRef(
     };
 
     const onChange = (value: string | boolean | null, field: PropKey) => {
-      const _param: IProductVariant = _.cloneDeep(param);
+      const _param: IProductCategory = _.cloneDeep(param);
       (_param as any)[field] = value;
       setParam(_param);
       performValidate([field as PropKey], _param);
     }
 
     const onChangeSelect = (value: any, field: PropKey) => {
-      const _param: IProductVariant = _.cloneDeep(param);
-      (_param as any)[field] = value;
+      const _param: IProductCategory = _.cloneDeep(param);
+      (_param as any)[field].id = value;
       setParam(_param);
       performValidate([field as PropKey], _param);
     }
+    
 
     return (
       <Form layout="vertical">
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item
-              label={t('website.product-variant.field.size')}
+              label={t('website.product-category.field.title')}
               required
-              validateStatus={errors['size'] ? 'error' : ''}
-              help={errors['size']}
+              validateStatus={errors['title'] ? 'error' : ''}
+              help={errors['title']}
             >
-              <Select
-                options={SIZE_PRODUCT.list.map(item => ({label: t(item.label), value: item.value}))}
-                fieldNames={{ label: 'label', value: 'value' }}
-                value={param?.size}
-                placeholder={t('website.product-variant.field.size')}
-                showSearch
-                onChange={(e) => onChange(e, "size")}
+              <Input
+                value={param.title}
+                placeholder={t('website.product-category.field.title')}
+                onChange={(e) => onChange(e.target.value, "title")}
+                disabled={readOnly || mode == MODE.VIEW}
               />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
-              label={t('website.product-variant.field.color')}
+              label={t('website.product-category.field.room-category')}
               required
-              validateStatus={errors['color'] ? 'error' : ''}
-              help={errors['color']}
+              validateStatus={errors['roomCategory'] ? 'error' : ''}
+              help={errors['roomCategory']}
             >
               <Select
-                options={color || []}
-                fieldNames={{ label: 'name', value: 'id' }}
-                value={param?.color?.id}
-                placeholder={t('website.product-variant.field.color')}
+                options={category || []}
+                fieldNames={{ label: 'title', value: 'id' }}
+                value={param?.roomCategory.id}
+                placeholder={t('website.product-category.field.room-category')}
                 showSearch
-                onChange={(_, value) => onChangeSelect(value, "color")}
+                disabled={readOnly || mode == MODE.VIEW}
+                onChange={(e) => onChangeSelect(e, "roomCategory")}
               />
             </Form.Item>
           </Col>
           <Col span={24}>
             <Form.Item
-              label={t('website.product-variant.field.name')}
-              required
-              validateStatus={errors['color'] ? 'error' : ''}
-              help={errors['color']}
-            >
-              <Select
-                options={product || []}
-                fieldNames={{ label: 'name', value: 'id' }}
-                value={param?.product?.id}
-                placeholder={t('website.product-variant.field.name')}
-                showSearch
-                loading={loadingProduct}
-                filterOption={false}
-                onSearch={(e) => setSearchProduct(e)}
-                onChange={(_, value) => onChangeSelect(value, "product")}
-                optionRender={(option) => {
-                  const item: any = option.data;
-                  return (
-                    <div className='flex items-center gap-2'>
-                      <Image
-                        src={item.image}
-                        width={40}
-                        height={40}
-                        preview={false}
-                        fallback={item.image}
-                        className='rounded-sm'
-                      />
-                      <span>{item.name}</span>
-                    </div>
-                  )
-                }}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label={t('website.product-variant.field.discount')}
+              label={t('website.product-category.field.description')}
             >
               <Input
-                value={param?.discount}
-                prefix={'%'}
-                placeholder={t('website.product-variant.field.discount')}
-                type="number"
-                onChange={(e) => onChange(e.target.value, "discount")}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label={t('website.product-variant.field.price')}
-              validateStatus={errors['price'] ? 'error' : ''}
-              required
-              help={errors['price']}
-            >
-              <Input
-                placeholder={t('website.product-variant.field.price')}
-                prefix={'đ'}
-                type="number"
-                value={param?.price}
-                onChange={(e) => onChange(e.target.value, "price")}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label={t('website.product-variant.field.quantity_in_stock')}
-              validateStatus={errors['quantity_in_stock'] ? 'error' : ''}
-              required
-              help={errors['quantity_in_stock']}
-            >
-              <Input
-                value={param?.quantity_in_stock}
-                placeholder={t('website.product-variant.field.quantity_in_stock')}
-                type="number"
-                onChange={(e) => onChange(e.target.value, "quantity_in_stock")}
+                value={param.description}
+                placeholder={t('website.product-category.field.description')}
+                onChange={(e) => onChange(e.target.value, "description")}
+                disabled={readOnly || mode == MODE.VIEW}
               />
             </Form.Item>
           </Col>
           <Col span={5}>
             <Form.Item
-              label={t('website.product-variant.field.image')}
+              label={t('website.product-category.field.image')}
             >
               <UploadImage
                 loading={loadImge}
@@ -481,7 +381,7 @@ export const ProductVariantDetailForm = forwardRef(
                     formData.append('image', file as Blob);
                     if(param.image) {
                       const id = publicId(param.image);
-                      await deleteImage(id);
+                      id && await deleteImage(id);
                     }
                     const res = await uploadImage(formData);
                     if(res){
@@ -497,13 +397,14 @@ export const ProductVariantDetailForm = forwardRef(
               />
             </Form.Item>
           </Col>
-          <Col span={19}>
+          <Col span={4}>
             <Form.Item
-              label={t('website.product-variant.field.is_active')}
+              label={t('website.product-category.field.featured')}
             >
               <Switch 
-                checked={param.is_active} 
-                onChange={(e) => onChange( e, "is_active")}
+                checked={param.featured} 
+                onChange={(e) => onChange( e, "featured")}
+                disabled={readOnly || mode == MODE.VIEW }
               />
             </Form.Item>
           </Col>

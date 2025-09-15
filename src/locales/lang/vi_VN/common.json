@@ -121,7 +121,8 @@
       "account": "Tài khoản",
       "profile": "Hồ sơ",
       "logout": "Đăng xuất",
-      "management": "Quản lý"
+      "management": "Quản lý",
+      "policy": "Chính sách"
     }
   },
   "dashboard": {
@@ -493,6 +494,17 @@
         "phone": "Số điện thoại không được phép trống",
         "address_line": "Địa chi không được phép trống",
         "customer": "Khách hàng không được phép trống"
+      }
+    },
+    "policy": {
+      "field": {
+        "title": "Tiêu đề",
+        "slug": "Đường dẫn",
+        "description": "Mô tả"
+      },
+      "create": "Thêm chính sách",
+      "error": {
+        "title": "Tiêu đề không được phép trống"
       }
     }
   },
