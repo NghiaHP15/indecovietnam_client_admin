@@ -482,7 +482,7 @@ export const ProductDetailForm = forwardRef(
               />
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col span={12}>
             <Form.Item
               label={t('website.product.field.category')}
               required
@@ -500,7 +500,7 @@ export const ProductDetailForm = forwardRef(
               />
             </Form.Item>
           </Col>
-          <Col span={8}>
+          <Col span={12}>
             <Form.Item
               label={t('website.product.field.status')}
               required
@@ -516,17 +516,6 @@ export const ProductDetailForm = forwardRef(
                 showSearch
                 disabled={readOnly || mode == MODE.VIEW}
                 onChange={(e) => onChangeStatus(e, "status")}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label={t('website.product.field.featured')}
-            >
-              <Switch 
-                checked={param.featured} 
-                onChange={(e) => onChange( e, "featured")}
-                disabled={readOnly || mode == MODE.VIEW }
               />
             </Form.Item>
           </Col>
@@ -571,7 +560,7 @@ export const ProductDetailForm = forwardRef(
                 columns={columns}
                 dataSource={param.variants || []}
               />) : (
-                <div style={{ borderColor: colorBorder }} className='w-full flex justify-center items-center h-[50px] text-sm border border-dashed rounded-md'>
+                <div style={{ borderColor: colorBorder }} className='w-full flex justify-center items-center h-[50px] text-sm border border-dashed rounded-md font-roboto'>
                   <span style={{ color: colorTextDescription }}>{t('website.product.variants-empty')}</span>
                 </div>
               )}
@@ -584,6 +573,7 @@ export const ProductDetailForm = forwardRef(
               <Editor 
                 sample={false} value={content || ""} 
                 onChange={(e) => onEditorChange(e)}
+                className='min-h-[250px] max-h-[450px]'
               />
             </Form.Item>
           </Col>
@@ -617,7 +607,17 @@ export const ProductDetailForm = forwardRef(
               />
             </Form.Item>
           </Col>
-          
+          <Col span={4}>
+            <Form.Item
+              label={t('website.product.field.featured')}
+            >
+              <Switch 
+                checked={param.featured} 
+                onChange={(e) => onChange( e, "featured")}
+                disabled={readOnly || mode == MODE.VIEW }
+              />
+            </Form.Item>
+          </Col>
         </Row>
       </Form>
       <VariantDetail 

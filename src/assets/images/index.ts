@@ -6,6 +6,7 @@ import revenue_icon from "./icon/amount-order.png";
 import feedback_icon from "./icon/feedback.png";
 import orders_icon from "./icon/count-order.png";
 import customers_icon from "./icon/customer.png";
+import logo_indecovietnam from "./logo-indeco.png";
 
 export {
   no_image,
@@ -15,5 +16,6 @@ export {
   revenue_icon,
   feedback_icon,
   orders_icon,
-  customers_icon
+  customers_icon,
+  logo_indecovietnam
 }

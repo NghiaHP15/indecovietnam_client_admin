@@ -25,6 +25,7 @@ import { deleteImage, uploadImage } from '@/api/services/uploadService';
 import { publicId } from '@/utils/publickey';
 import { internalServiceCategorys } from '@/api/services/serviceCategoryService';
 import { createService, updateService } from '@/api/services/serviceService';
+import { formatUTC } from '@/utils/format-date';
 
 type Props = {
   reload: () => void;
@@ -390,7 +391,7 @@ export const ServiceDetailForm = forwardRef(
               <DatePicker
                 value={param?.published_at ? dayjs(param?.published_at) : null}
                 disabled={readOnly || mode == MODE.VIEW}
-                onChange={(e) => onChange(e ? e.toISOString() : null, "published_at")}
+                onChange={(e) => onChange(e ? formatUTC(e.toString()) : null, "published_at")}
                 format="YYYY-MM-DD"
                 style={{ width: '100%' }}
               />

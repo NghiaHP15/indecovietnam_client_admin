@@ -163,7 +163,7 @@ export default function Header({ className = '', offsetTop = false }: Props) {
             transition: 'height 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
           }}
         >
-          <div className="flex items-baseline">
+          <div className="flex items-center">
             {themeLayout !== ThemeLayout.Horizontal ? (
               <IconButton onClick={() => setDrawerOpen(true)} className="h-10 w-10 md:hidden">
                 <SvgIcon icon="ic-menu" size="24" />

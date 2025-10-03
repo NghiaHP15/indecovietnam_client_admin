@@ -255,6 +255,18 @@
   margin: 0 !important;
 }
 
+.menu-horizontal .ant-menu-item {
+  display: flex !important;
+  align-items: center !important;
+}
+
+
+.ant-menu .ant-menu-item,
+.ant-dropdown-menu-item,
+.ant-breadcrumb,
+.ant-input-number-input,
+.ant-picker-panel-layout,
+.ant-picker,
 .ant-drawer-title,
 .ant-tabs-nav-list,
 .ant-popconfirm-title,

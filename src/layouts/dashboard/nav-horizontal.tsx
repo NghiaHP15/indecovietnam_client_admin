@@ -62,7 +62,7 @@ export default function NavHorizontal() {
       <Menu
         mode="horizontal"
         items={menuList}
-        className="!z-10 !border-none"
+        className="!z-10 !border-none menu-horizontal"
         defaultOpenKeys={openKeys}
         defaultSelectedKeys={selectedKeys}
         selectedKeys={selectedKeys}

@@ -6,8 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useThemeToken } from "@/theme/hooks";
 import { IBlogCategory } from "#/entity";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { useDebounce } from "@/router/hooks";
 import { PERMISSION_ACTION, ROUTE_NAME } from "@/_mock/assets";
 import { usePermission } from "@/store/userStore";
@@ -307,7 +306,7 @@ const BlogCategory = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400" /> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 

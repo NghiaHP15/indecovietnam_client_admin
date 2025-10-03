@@ -1,10 +1,8 @@
 import { Avatar, Typography } from 'antd';
 import { useEffect, useState } from 'react';
-
 import Card from '@/components/card';
 import { no_image } from '@/assets/images';
 import { useTranslation } from 'react-i18next';
-import { fCurrencyVN } from '@/utils/format-number';
 
 export default function TopInstalled( { data }: { data: any } ) {
   const { t } = useTranslation();
@@ -27,7 +25,8 @@ export default function TopInstalled( { data }: { data: any } ) {
               <span className="mx-2 font-medium font-roboto">{item.sku}</span>
               <span className='rounded-full' style={{ backgroundColor: item.color.code, height: '15px', width: '15px' }}></span>
             </div>
-            <span className="mx-2 font-medium font-roboto">{fCurrencyVN(item.price)}</span>
+            {/* <span className="mx-2 font-medium font-roboto">{fCurrencyVN(item.price)}</span> */}
+            <span className="mx-2 font-medium font-roboto">{item.quantity_selled}</span>
           </div>
         ))}
       </main>

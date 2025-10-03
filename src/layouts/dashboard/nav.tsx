@@ -7,9 +7,9 @@ import { useRouteToMenuFn, usePermissionRoutes } from '@/router/hooks';
 import { menuFilter } from '@/router/utils';
 import { useSettingActions, useSettings } from '@/store/settingStore';
 import { useThemeToken } from '@/theme/hooks';
-import logo from "../../assets/images/logo.png"
 import { NAV_COLLAPSED_WIDTH, NAV_WIDTH } from './config';
 import { ThemeLayout } from '#/enum';
+import { logo_indecovietnam } from '@/assets/images';
 
 type Props = {
   closeSideBarDrawer?: () => void;
@@ -109,8 +109,8 @@ export default function Nav(props: Props) {
       }}
     >
       <div className="relative flex h-35 items-center justify-center">
-        <div className='w-full mx-7 py-4 border-dashed border-b flex justify-center items-center' style={{borderColor: "#2b2b2b"}}>
-          <Avatar src={logo} shape="square" className="transition-all transition-duration-300" style={{width: collapsed ? 80 : 158, height: "auto"}} />
+        <div className='w-full mx-5 py-2 border-dashed border-b flex justify-center items-center' style={{borderColor: "#2b2b2b"}}>
+          <Avatar src={logo_indecovietnam} shape="square" className="transition-all transition-duration-300" style={{width: collapsed ? 80 : 200, height: "auto"}} />
         </div>
         <button
           onClick={toggleCollapsed}

@@ -22,6 +22,7 @@ import { createCustomer, updateCustomer } from '@/api/services/customerService';
 import dayjs from 'dayjs';
 import { UploadImage } from '@/components/upload';
 import { deleteImage, uploadImage } from '@/api/services/uploadService';
+import { formatUTC } from '@/utils/format-date';
 
 type Props = {
   reload: () => void;
@@ -370,7 +371,7 @@ export const CustomerDetailForm = forwardRef(
                 type='password'
                 placeholder={t('management.customer.field.password')}
                 onChange={(e) => onChange(e.target.value, "password")}
-                disabled={readOnly || mode == MODE.VIEW || mode == MODE.UPDATE}
+                disabled={readOnly || mode == MODE.VIEW}
               />
             </Form.Item>
           </Col>
@@ -412,7 +413,7 @@ export const CustomerDetailForm = forwardRef(
                 value={param.date_of_birth ? dayjs(param.date_of_birth) : null}
                 placeholder={t('management.customer.field.date_of_birth')}
                 disabled={readOnly || mode == MODE.VIEW}
-                onChange={(e) => onChange(e.toISOString(), "date_of_birth")}
+                onChange={(e) => onChange(e ? formatUTC(e.toString()) : null, "date_of_birth")}
               />
             </Form.Item>
           </Col>

@@ -7,8 +7,7 @@ import { useThemeToken } from "@/theme/hooks";
 import { IOrder } from "#/entity";
 import { ColumnType } from "antd/es/table";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { useDebounce } from "@/router/hooks";
 import OrderDetail from "./detail";
 import { PERMISSION_ACTION, ROUTE_NAME } from "@/_mock/assets";
@@ -16,9 +15,9 @@ import { usePermission } from "@/store/userStore";
 import _ from "lodash";
 import { ORDER_STATUS, PAYMENT_STATUS } from "#/enum";
 import { internalOrders, updateOrder } from "@/api/services/orderService";
-import dayjs from "dayjs";
 import { fCurrency } from "@/utils/format-number";
 import DetailViewOrder from "./view";
+import { formatDate } from "@/utils/format-date";
 
 type PropKey = keyof IOrder;
 
@@ -70,7 +69,7 @@ const Gallery = () => {
         key: 'txnRef',
         title: t('management.order.field.txnref'),
         dataIndex: 'txnRef',
-        width: 200,
+        width: 220,
         render: (_, record) => <span className="line-clamp-2">{record.txnRef}</span>
       },
       {
@@ -78,7 +77,7 @@ const Gallery = () => {
         title: t('management.order.field.order_date'),
         dataIndex: 'order_date',
         width: 150,
-        render: (_, record) => <span className="line-clamp-2">{dayjs(record.order_date).format('DD/MM/YYYY')}</span>
+        render: (_, record) => <span className="line-clamp-2">{formatDate(record.order_date)}</span>
       },
       {
         key: 'total_amount',
@@ -279,7 +278,7 @@ const Gallery = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400" /> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 

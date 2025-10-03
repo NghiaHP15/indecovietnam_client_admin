@@ -313,11 +313,12 @@ export const RoomCategoryDetailForm = forwardRef(
               />
             </Form.Item>
           </Col>
-          <Col span={5}>
+          <Col span={8}>
             <Form.Item
               label={t('website.room-category.field.image')}
             >
               <UploadImage
+                width='100%'
                 loading={loadImge}
                 defaultImage={param.image || ""}
                 customRequest={async ({ file, onSuccess, onError}) => {

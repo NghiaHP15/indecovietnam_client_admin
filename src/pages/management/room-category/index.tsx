@@ -7,8 +7,7 @@ import { useThemeToken } from "@/theme/hooks";
 import { IRoomCategory } from "#/entity";
 import { ColumnType } from "antd/es/table";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { no_image } from "@/assets/images";
 import { useDebounce } from "@/router/hooks";
 import RoomCategoryDetail from "./detail";
@@ -80,7 +79,7 @@ const RoomCategory = () => {
         key: 'image',
         dataIndex: 'image',
         title: t("website.room-category.field.image"),
-        width: 150,
+        width: 300,
         render: (_, record) => (
           <div className="flex items-center rounded-md w-max h-max overflow-hidden">
             <Image src={record.image || no_image} height={100}  className=" overflow-hidden" />
@@ -99,7 +98,7 @@ const RoomCategory = () => {
         key: 'description',
         title: t('website.room-category.field.description'),
         dataIndex: 'description',
-        width: 200,
+        width: 250,
         render: (_, record) => <span className="line-clamp-2">{record.description}</span>
       },
       {
@@ -209,7 +208,7 @@ const RoomCategory = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400" /> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 

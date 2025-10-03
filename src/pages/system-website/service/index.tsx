@@ -7,9 +7,7 @@ import { useThemeToken } from "@/theme/hooks";
 import { IService } from "#/entity";
 import { ColumnType } from "antd/es/table";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
-import dayjs from "dayjs";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { no_image } from "@/assets/images";
 import { useDebounce } from "@/router/hooks";
 import ServiceDetail from "./detail";
@@ -17,6 +15,7 @@ import { PERMISSION_ACTION, ROUTE_NAME } from "@/_mock/assets";
 import { usePermission } from "@/store/userStore";
 import _ from "lodash";
 import { deleteService, internalService } from "@/api/services/serviceService";
+import { formatDate } from "@/utils/format-date";
 
 type PropKey = keyof IService;
 
@@ -100,7 +99,7 @@ const Service = () => {
         dataIndex: 'published_at',
         title: t("website.service.field.published_at"),
         width: 150,
-        render: (_, record) => <span>{dayjs(record.published_at).format('DD/MM/YYYY')}</span>
+        render: (_, record) => <span>{formatDate(record.published_at.toString())}</span>
       },
       {
         key: 'category',
@@ -212,7 +211,7 @@ const Service = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400" /> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 

@@ -7,8 +7,7 @@ import { useThemeToken } from "@/theme/hooks";
 import { IProductCategory } from "#/entity";
 import { ColumnType } from "antd/es/table";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { no_image } from "@/assets/images";
 import { useDebounce } from "@/router/hooks";
 import ProductCategoryDetail from "./detail";
@@ -216,7 +215,7 @@ const ProductCategory = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400" /> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 

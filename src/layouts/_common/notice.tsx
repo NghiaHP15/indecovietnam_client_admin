@@ -4,7 +4,6 @@ import { IconButton, Iconify } from '@/components/icon';
 import ProTag from '@/theme/antd/components/tag';
 import { useThemeToken } from '@/theme/hooks';
 // import { useTranslation } from 'react-i18next';
-import dayjs from 'dayjs';
 import { getUnread, markAsRead, notiReadAll } from '@/api/services/notificationService';
 import { NOTI_TYPE } from '#/enum';
 import { no_avatar } from '@/assets/images';
@@ -13,6 +12,7 @@ import { IContact, IOrder } from '#/entity';
 import { getOrder } from '@/api/services/orderService';
 import { getFeedback } from '@/api/services/feedbackService';
 import { fCurrencyVN } from '@/utils/format-number';
+import { formatDateTime } from '@/utils/format-date';
 export default function NoticeButton({reload}: any) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const themeToken = useThemeToken();
@@ -144,7 +144,7 @@ function NoticeTab(props) {
               <span className="font-light">{item.message}</span>}
           </div>
           <div className='flex flex-col'>
-            <span className="text-xs font-light opacity-60">{dayjs(item.created_at).format('DD/MM/YYYY HH:mm:ss')}</span>{' '}
+            <span className="text-xs font-light opacity-60">{formatDateTime(item.createdAt)}</span>{' '}
             <span>{item.type ===  NOTI_TYPE.CONTACT ? item.contact.name : item.order.customer.firstname + ' ' + item.order.customer.lastname}</span>
           </div>
         </div>
@@ -234,7 +234,7 @@ const Detail = (props: any) => {
       title={props.title}
       onCancel={onCancel}
       open={show}
-      width={1000}
+      width={800}
       footer={null}
       styles={{
           body: { overflowY: 'scroll', flexGrow: 1 },
@@ -245,11 +245,25 @@ const Detail = (props: any) => {
     >
       <div className='flex justify-between'>
         <div>
-          <p><span className='font-medium'>{t('setting.notification.message')}:</span> {formValue?.message}</p>
-          <p><span className='font-medium'>{t('setting.notification.time')}:</span> {dayjs(formValue?.created_at).format('DD/MM/YYYY HH:mm:ss')}</p>
+          <div><span className='font-medium'>{t('setting.notification.message')}:</span> <span>{formValue?.message}</span></div>
+          <p><span className='font-medium'>{t('setting.notification.time')}:</span> {formatDateTime(formValue?.createdAt)}</p>
           <p><span className='font-medium'>{t('setting.notification.type')}:</span> {formValue?.type === NOTI_TYPE.CONTACT ? 'Liên hệ' : 'Đơn hàng'}</p>
           <p><span className='font-medium'>{t('setting.notification.name')}:</span> {formValue?.type === NOTI_TYPE.CONTACT ? formValue?.contact?.name : formValue?.order?.customer?.firstname + ' ' + formValue?.order?.customer?.lastname}</p>
         </div>
+        {formValue?.type === NOTI_TYPE.CONTACT && contactData && (
+          <div>
+            <p><span className='font-medium'>{t('website.feedback.field.email')}: </span><span>{contactData?.email}</span></p>
+            <p><span className='font-medium'>{t('website.feedback.field.phone')}: </span><span>{contactData?.phone}</span></p>
+            <p><span className='font-medium'>{t('website.feedback.field.type')}: </span><span>{contactData?.type}</span></p>
+          </div>
+        )}
+        {formValue?.type === NOTI_TYPE.ORDER && orderData && (
+          <div>
+            <><p><span className='font-medium'>{t('management.order.detail.txnref')}:</span> {orderData?.txnRef}</p></>
+            <><p><span className='font-medium'>{t('management.order.detail.email')}:</span> {orderData?.customer?.email}</p></>
+            <><p><span className='font-medium'>{t('management.order.detail.phone')}:</span> {orderData?.address?.phone}</p></>
+          </div>
+        )}
         <Avatar
           shape="square"
           size={100}
@@ -258,9 +272,6 @@ const Detail = (props: any) => {
       </div>
       {formValue?.type === NOTI_TYPE.ORDER && orderData && (
         <div className='mt-0'>
-          <><p><span className='font-medium'>{t('management.order.detail.txnref')}:</span> {orderData?.txnRef}</p></>
-          <><p><span className='font-medium'>{t('management.order.detail.email')}:</span> {orderData?.customer?.email}</p></>
-          <><p><span className='font-medium'>{t('management.order.detail.phone')}:</span> {orderData?.address?.phone}</p></>
           <Table
             className='mt-2'
             size={'small'}
@@ -305,16 +316,13 @@ const Detail = (props: any) => {
         </div>
       )}
       {formValue?.type === NOTI_TYPE.CONTACT && contactData && (
-        <div className='mt-2'>
-          <div className='grid grid-cols-3 gap-x-8 gap-y-2'>
-            <p className='flex justify-between'><span className='font-medium'>{t('website.feedback.field.email')}:</span><span>{contactData?.email}</span></p>
-            <p className='flex justify-between'><span className='font-medium'>{t('website.feedback.field.phone')}:</span> <span>{contactData?.phone}</span></p>
-            <p className='flex justify-between'><span className='font-medium'>{t('website.feedback.field.type')}:</span> <span>{contactData?.type}</span></p>
-            <p className='flex col-span-3 gap-2'><span className='font-medium'>{t('website.feedback.field.subject')}:</span> <span>{contactData?.subject}</span></p>
-            <p className='flex flex-col col-span-3'><span className='font-medium'>{t('website.feedback.field.message')}:</span> <span>{contactData?.message}</span></p>
+          <div>
+            <div className=''>
+              <p className='flex col-span-3 gap-2'><span className='font-medium'>{t('website.feedback.field.subject')}:</span> <span>{contactData?.subject}</span></p>
+              <p className='flex flex-col col-span-3'><span className='font-medium'>{t('website.feedback.field.message')}:</span> <span>{contactData?.message}</span></p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </Modal>
   );
 };

@@ -31,6 +31,7 @@ import { internalProducts } from '@/api/services/productService';
 import { internalProductVariants } from '@/api/services/productVariantService';
 import { fCurrencyVN } from '@/utils/format-number';
 import { createOrder, updateOrder } from '@/api/services/orderService';
+import { formatUTC } from '@/utils/format-date';
 
 type Props = {
   reload: () => void;
@@ -588,6 +589,7 @@ export const OrderDetailForm = forwardRef(
                 value={param.order_date ? dayjs(param.order_date) : null}
                 placeholder={t('management.order.detail.order_date')}
                 disabled={readOnly || mode == MODE.VIEW}
+                onChange={(e) => onChange(e ? formatUTC(e.toString()) : null, "order_date")}
               />
             </Form.Item>
           </Col>

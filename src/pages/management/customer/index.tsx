@@ -7,8 +7,7 @@ import { useThemeToken } from "@/theme/hooks";
 import { ICustomer } from "#/entity";
 import { ColumnType } from "antd/es/table";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { no_image } from "@/assets/images";
 import { useDebounce } from "@/router/hooks";
 import CustomerDetail from "./detail";
@@ -16,9 +15,9 @@ import { PERMISSION_ACTION, ROUTE_NAME } from "@/_mock/assets";
 import { usePermission } from "@/store/userStore";
 import _ from "lodash";
 import { deleteCustomer, internalCustomers } from "@/api/services/customerService";
-import dayjs from "dayjs";
 import { GENDER_OPTIONS } from "#/enum";
 import CustomerViewDetail from "./view";
+import { formatDate } from "@/utils/format-date";
 type PropKey = keyof ICustomer;
 
 const Customer = () => {
@@ -101,7 +100,7 @@ const Customer = () => {
         dataIndex: 'phone',
         title: t("management.customer.field.phone"),
         width: 150,
-        render: (_, record) => <span className="line-clamp-2">{record.phone}</span>
+        render: (_, record) => <span className="line-clamp-2">{record.phone || "xxxx.xxx.xxx"}</span>
       },
       {
         key: 'gender',
@@ -120,7 +119,7 @@ const Customer = () => {
         dataIndex: 'date_of_birth',
         title: t("management.customer.field.date_of_birth"),
         width: 150,
-        render: (_, record) => <span className="line-clamp-2">{record.date_of_birth ? dayjs(record.date_of_birth).format('DD/MM/YYYY') : ""}</span>
+        render: (_, record) => <span className="line-clamp-2">{formatDate(record.date_of_birth?.toString() || "")}</span>
       },
       {
         key: 'level',
@@ -236,7 +235,7 @@ const Customer = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400" /> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 

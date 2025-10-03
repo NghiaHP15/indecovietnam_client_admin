@@ -7,8 +7,7 @@ import { useThemeToken } from "@/theme/hooks";
 import { IGallery } from "#/entity";
 import { ColumnType } from "antd/es/table";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { no_image } from "@/assets/images";
 import { useDebounce } from "@/router/hooks";
 import GalleryDetail from "./detail";
@@ -74,7 +73,7 @@ const Gallery = () => {
         key: 'image',
         dataIndex: 'image',
         title: t("website.gallery.field.image"),
-        width: 200,
+        width: 250,
         render: (_, record) => (
           <div className="flex items-center rounded-md w-max h-max overflow-hidden">
             <Image src={record.image || no_image} height={100} />
@@ -86,7 +85,7 @@ const Gallery = () => {
         title: t('website.gallery.field.description'),
         dataIndex: 'description',
         hidden: lazyParams.type === TYPE_GALLERY.SOCIAL,
-        width: 200,
+        width: 250,
         render: (_, record) => <span className="line-clamp-2">{record.description}</span>
       },
       {
@@ -94,7 +93,7 @@ const Gallery = () => {
         title: t('website.gallery.field.href'),
         dataIndex: 'description',
         hidden: lazyParams.type === TYPE_GALLERY.SOCIAL || lazyParams.type === TYPE_GALLERY.DESIGN,
-        width: 150,
+        width: 250,
         render: (_, record) => <span className="line-clamp-2">{record.href}</span>
       },
       {
@@ -242,7 +241,7 @@ const Gallery = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400"/> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 

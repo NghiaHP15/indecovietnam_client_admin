@@ -477,7 +477,7 @@ const WEBSITE = {
   parentId: '',
   label: 'common.menu.website',
   name: 'Website',
-  icon: "ic-website",
+  icon: "ic-quotation",
   type: PermissionType.CATALOGUE,
   route: 'system-website',
   order: 5,
@@ -765,37 +765,6 @@ const WEBSITE = {
     {
       id: '000000000000000510',
       parentId: '0000000000000005',
-      label: 'common.menu.address',
-      name: ROUTE_NAME.Address,
-      type: PermissionType.MENU,
-      route: 'address',
-      order: 5,
-      component: '/system-website/address/index.tsx',
-      func: [
-        {
-          code: 'view',
-          name: "View",
-        },
-        {
-          code: 'create',
-          name: 'Create',
-        },
-        {
-          code: 'update',
-          name: 'Update',
-        },
-        {
-          code: 'delete',
-          name: 'Delete',
-        },
-      ],
-      permission: [],
-      path: '[4].children.[9]',
-      pathParent: '[4]',
-    },
-    {
-      id: '000000000000000511',
-      parentId: '0000000000000005',
       label: 'common.menu.policy',
       name: ROUTE_NAME.Policy,
       type: PermissionType.MENU,
@@ -821,7 +790,7 @@ const WEBSITE = {
         },
       ],
       permission: [],
-      path: '[4].children.[10]',
+      path: '[4].children.[9]',
       pathParent: '[4]',
     },
   ]

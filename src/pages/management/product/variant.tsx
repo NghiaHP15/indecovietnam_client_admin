@@ -4,7 +4,7 @@ import {
   Button,
   Col,
   Form,
-  Input,
+  InputNumber,
   Modal,
   Row,
   Select,
@@ -305,7 +305,7 @@ export const VariantDetailForm = forwardRef(
       setParam(emptyParameter);
     };
 
-    const onChange = (value: string | boolean | null, field: PropKey) => {
+    const onChange = (value: string | number | boolean | null, field: PropKey) => {
       const _param: IProductVariant = _.cloneDeep(param);
       (_param as any)[field] = value;
       setParam(_param);
@@ -351,6 +351,12 @@ export const VariantDetailForm = forwardRef(
                 fieldNames={{ label: 'name', value: 'id' }}
                 value={param?.color?.id}
                 placeholder={t('website.product-variant.field.color')}
+                optionRender={(option) => (
+                  <div className='flex items-center gap-2'>
+                    <span style={{ backgroundColor: option.data.code }} className='w-4 h-4 rounded-full shadow'></span>
+                    <span>{option.data.name}</span>
+                  </div>
+                )}
                 showSearch
                 onChange={(_, value) => onChangeColor(value, "color")}
               />
@@ -360,12 +366,13 @@ export const VariantDetailForm = forwardRef(
             <Form.Item
               label={t('website.product-variant.field.discount')}
             >
-              <Input
-                value={param?.discount}
+              <InputNumber
+                min={0}
                 prefix={'%'}
+                value={param?.discount}
+                style={{ width: '100%' }}
                 placeholder={t('website.product-variant.field.discount')}
-                type="number"
-                onChange={(e) => onChange(e.target.value, "discount")}
+                onChange={(e) => onChange(e, "discount")}
               />
             </Form.Item>
           </Col>
@@ -376,12 +383,14 @@ export const VariantDetailForm = forwardRef(
               required
               help={errors['price']}
             >
-              <Input
-                placeholder={t('website.product-variant.field.price')}
+              <InputNumber
+                min={0}
+                step={1000}
                 prefix={'đ'}
-                type="number"
+                placeholder={t('website.product-variant.field.price')}
+                style={{ width: '100%' }}
                 value={param?.price}
-                onChange={(e) => onChange(e.target.value, "price")}
+                onChange={(e) => onChange(e, "price")}
               />
             </Form.Item>
           </Col>
@@ -392,11 +401,15 @@ export const VariantDetailForm = forwardRef(
               required
               help={errors['quantity_in_stock']}
             >
-              <Input
+              <InputNumber
                 value={param?.quantity_in_stock}
+                min={0}
+                max={1000}
                 placeholder={t('website.product-variant.field.quantity_in_stock')}
+                className='w-full! font-roboto'
+                style={{ width: '100%' }}
                 type="number"
-                onChange={(e) => onChange(e.target.value, "quantity_in_stock")}
+                onChange={(e) => onChange(e, "quantity_in_stock")}
               />
             </Form.Item>
           </Col>

@@ -28,6 +28,7 @@ import { publicId } from '@/utils/publickey';
 import { internalEmployees } from '@/api/services/employeeService';
 import { internalBlogCategorys } from '@/api/services/blogCategoryService';
 import { createBlog, updateBlog } from '@/api/services/blogService';
+import { formatUTC } from '@/utils/format-date';
 
 type Props = {
   reload: () => void;
@@ -421,9 +422,9 @@ export const BlogDetailForm = forwardRef(
           <Col span={8}>
             <Form.Item label={t('website.blog.field.published_at')}>
               <DatePicker
-                value={param?.published_at ? dayjs(param?.published_at) : null}
+                value={param?.published_at ? dayjs(param.published_at) : null}
                 disabled={readOnly || mode == MODE.VIEW}
-                onChange={(e) => onChange(e ? e.toISOString() : null, "published_at")}
+                onChange={(e) => onChange(e ? formatUTC(e.toString()) : null, "published_at")}
                 format="YYYY-MM-DD"
                 style={{ width: '100%' }}
               />
@@ -444,18 +445,7 @@ export const BlogDetailForm = forwardRef(
               />
             </Form.Item>
           </Col>
-          <Col span={4}>
-            <Form.Item
-              label={t('website.blog.field.latest_blog')}
-            >
-              <Switch 
-                checked={param.latest_blog} 
-                onChange={(e) => onChange( e, "latest_blog")}
-                disabled={readOnly || mode == MODE.VIEW }
-              />
-            </Form.Item>
-          </Col>
-          <Col span={20}>
+          <Col span={24}>
             <Form.Item
               label={
                 <div className='flex gap-2 cursor-pointer'>
@@ -514,7 +504,17 @@ export const BlogDetailForm = forwardRef(
               />
             </Form.Item>
           </Col>
-          
+          <Col span={4}>
+            <Form.Item
+              label={t('website.blog.field.latest_blog')}
+            >
+              <Switch 
+                checked={param.latest_blog} 
+                onChange={(e) => onChange( e, "latest_blog")}
+                disabled={readOnly || mode == MODE.VIEW }
+              />
+            </Form.Item>
+          </Col>
         </Row>
       </Form>
     );

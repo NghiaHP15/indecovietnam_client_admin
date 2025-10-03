@@ -6,8 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useThemeToken } from "@/theme/hooks";
 import { ColumnType } from "antd/es/table";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { no_image } from "@/assets/images";
 import { useDebounce } from "@/router/hooks";
 import { PERMISSION_ACTION, ROUTE_NAME } from "@/_mock/assets";
@@ -111,7 +110,7 @@ const Blog = () => {
         render: (_, record) => {
           return (
           <div className="flex items-center gap-2">
-            <span className={`w-4 h-4 rounded-full`} style={{ backgroundColor: record?.color?.code }}></span>
+            <span className={`w-4 h-4 rounded-full shadow`} style={{ backgroundColor: record?.color?.code }}></span>
             <span className="line-clamp-2">{record?.color?.name}</span>
           </div>
         )
@@ -260,7 +259,7 @@ const Blog = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400" /> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 

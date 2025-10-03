@@ -7,16 +7,15 @@ import { useThemeToken } from "@/theme/hooks";
 import { IBlog } from "#/entity";
 import { ColumnType } from "antd/es/table";
 import ButtonIcon from "@/components/ButtonIcon";
-import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import Icons from "@/assets/icons";
+import { LeftOutlined, PlusOutlined, RightOutlined, SearchOutlined } from "@ant-design/icons";
 import { deleteBlog, internalBlogs, updateBlog }  from "@/api/services/blogService";
-import dayjs from "dayjs";
 import { no_image } from "@/assets/images";
 import { useDebounce } from "@/router/hooks";
 import BlogDetail from "./detail";
 import { PERMISSION_ACTION, ROUTE_NAME } from "@/_mock/assets";
 import { usePermission } from "@/store/userStore";
 import _ from "lodash";
+import { formatDate } from "@/utils/format-date";
 
 type PropKey = keyof IBlog;
 
@@ -108,7 +107,7 @@ const Blog = () => {
         dataIndex: 'published_at',
         title: t("website.blog.field.published_at"),
         width: 150,
-        render: (_, record) => <span>{dayjs(record.published_at).format('DD/MM/YYYY')}</span>
+        render: (_, record) => <span>{formatDate(record.published_at.toString())}</span>
       },
       {
         key: 'category',
@@ -238,7 +237,7 @@ const Blog = () => {
                 </Button>
               </Space>
               <Space>
-                <Input placeholder={t('common.search')} suffix={<Icons.Search /> } onChange={(e) => onChangeSearch(e.target.value)} />
+                <Input placeholder={t('common.search')} suffix={<SearchOutlined className="text-gray-400" /> } onChange={(e) => onChangeSearch(e.target.value)} />
                 <Select 
                   style={{ width: 200 }} 
                   placeholder={t('common.hide_column')} 
